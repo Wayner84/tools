@@ -1,0 +1,387 @@
+[
+  {
+    "slug": "cyberchef",
+    "name": "CyberChef",
+    "description": "Encoding, hashing, encryption, hex, Base64, compression and data manipulation.",
+    "category": "Data & crypto",
+    "launchUrl": "https://gchq.github.io/CyberChef/",
+    "sourceRepo": "gchq/CyberChef",
+    "sourceUrl": "https://github.com/gchq/CyberChef",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v11.3.0",
+      "publishedAt": "2026-07-24T07:23:36Z"
+    },
+    "defaultBranch": "master"
+  },
+  {
+    "slug": "it-tools",
+    "name": "IT-Tools",
+    "description": "Developer, network, text, web and crypto utilities in one place.",
+    "category": "Developer",
+    "launchUrl": "https://it-tools.tech/",
+    "sourceRepo": "CorentinTh/it-tools",
+    "sourceUrl": "https://github.com/CorentinTh/it-tools",
+    "license": "GPL-3.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v2024.10.22-7ca5933",
+      "publishedAt": "2024-10-22T09:58:03Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "excalidraw",
+    "name": "Excalidraw",
+    "description": "Fast sketch-style whiteboarding and rough diagrams.",
+    "category": "Diagrams",
+    "launchUrl": "https://excalidraw.com/",
+    "sourceRepo": "excalidraw/excalidraw",
+    "sourceUrl": "https://github.com/excalidraw/excalidraw",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v0.18.1",
+      "publishedAt": "2026-04-21T08:43:20Z"
+    },
+    "defaultBranch": "master"
+  },
+  {
+    "slug": "mermaid",
+    "name": "Mermaid Live Editor",
+    "description": "Generate flowcharts, sequences and diagrams from text.",
+    "category": "Diagrams",
+    "launchUrl": "https://mermaid.live/",
+    "sourceRepo": "mermaid-js/mermaid-live-editor",
+    "sourceUrl": "https://github.com/mermaid-js/mermaid-live-editor",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "61b23314cdbb987866effda5f62ce52f4a5b38a4",
+      "publishedAt": "2026-08-06T18:12:20Z"
+    },
+    "defaultBranch": "develop"
+  },
+  {
+    "slug": "jsoncrack",
+    "name": "JSON Crack",
+    "description": "Turn JSON, YAML, XML and CSV into interactive diagrams.",
+    "category": "Data & crypto",
+    "launchUrl": "https://jsoncrack.com/editor",
+    "sourceRepo": "AykutSarac/jsoncrack.com",
+    "sourceUrl": "https://github.com/AykutSarac/jsoncrack.com",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v5.0.0",
+      "publishedAt": "2026-03-11T11:14:55Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "swagger-ui",
+    "name": "Swagger UI",
+    "description": "Explore and test OpenAPI documentation interactively.",
+    "category": "API & code",
+    "launchUrl": "https://petstore.swagger.io/",
+    "sourceRepo": "swagger-api/swagger-ui",
+    "sourceUrl": "https://github.com/swagger-api/swagger-ui",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v5.32.13",
+      "publishedAt": "2026-08-11T12:38:34Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "hoppscotch",
+    "name": "Hoppscotch",
+    "description": "Postman-like REST, GraphQL and realtime API testing.",
+    "category": "API & code",
+    "launchUrl": "https://hoppscotch.io/",
+    "sourceRepo": "hoppscotch/hoppscotch",
+    "sourceUrl": "https://github.com/hoppscotch/hoppscotch",
+    "license": "MIT",
+    "hosting": "external-service",
+    "tracked": {
+      "kind": "release",
+      "value": "2026.7.0",
+      "publishedAt": "2026-07-30T11:58:56Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "bentopdf",
+    "name": "BentoPDF",
+    "description": "130+ privacy-focused browser-side PDF tools.",
+    "category": "Documents",
+    "launchUrl": "https://bentopdf.com/",
+    "sourceRepo": "alam00000/bentopdf",
+    "sourceUrl": "https://github.com/alam00000/bentopdf",
+    "license": "AGPL-3.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v2.8.7",
+      "publishedAt": "2026-07-27T07:40:35Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "browserpdf",
+    "name": "BrowserPDF",
+    "description": "Convert and edit PDFs entirely in the browser.",
+    "category": "Documents",
+    "launchUrl": "https://browserpdf.com/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary/unknown",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "md2pdf",
+    "name": "MD2PDF",
+    "description": "Convert Markdown to PDF with a live preview.",
+    "category": "Documents",
+    "launchUrl": "https://md2pdf.netlify.app/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Unknown",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "sqlite-viewer",
+    "name": "SQLite Viewer",
+    "description": "Open, inspect and query SQLite databases in-browser.",
+    "category": "Data & crypto",
+    "launchUrl": "https://sqliteviewer.app/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary/unknown",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "svgomg",
+    "name": "SVGOMG",
+    "description": "Visually optimise and compress SVG files.",
+    "category": "Media",
+    "launchUrl": "https://jakearchibald.github.io/svgomg/",
+    "sourceRepo": "jakearchibald/svgomg",
+    "sourceUrl": "https://github.com/jakearchibald/svgomg",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "f925656d40a507c512bf95ee14ad16445a4ad3ed",
+      "publishedAt": "2025-09-29T08:30:27Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "squoosh",
+    "name": "Squoosh",
+    "description": "Client-side image compression, resizing and conversion.",
+    "category": "Media",
+    "launchUrl": "https://squoosh.app/",
+    "sourceRepo": "GoogleChromeLabs/squoosh",
+    "sourceUrl": "https://github.com/GoogleChromeLabs/squoosh",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
+      "publishedAt": "2024-08-19T07:50:41Z"
+    },
+    "defaultBranch": "dev"
+  },
+  {
+    "slug": "photopea",
+    "name": "Photopea",
+    "description": "Full Photoshop-like image editor in the browser.",
+    "category": "Media",
+    "launchUrl": "https://www.photopea.com/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "jspaint",
+    "name": "JS Paint",
+    "description": "Faithful browser remake of classic Microsoft Paint.",
+    "category": "Media",
+    "launchUrl": "https://jspaint.app/",
+    "sourceRepo": "1j01/jspaint",
+    "sourceUrl": "https://github.com/1j01/jspaint",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v1.1.0",
+      "publishedAt": "2026-04-10T02:46:52Z"
+    },
+    "defaultBranch": "master"
+  },
+  {
+    "slug": "tldraw",
+    "name": "tldraw",
+    "description": "Infinite canvas for whiteboarding, notes and diagrams.",
+    "category": "Diagrams",
+    "launchUrl": "https://www.tldraw.com/",
+    "sourceRepo": "tldraw/tldraw",
+    "sourceUrl": "https://github.com/tldraw/tldraw",
+    "license": "Custom source-available",
+    "hosting": "external-service",
+    "tracked": {
+      "kind": "release",
+      "value": "v5.3.0",
+      "publishedAt": "2026-08-05T11:40:03Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "monaco",
+    "name": "Monaco Editor",
+    "description": "Try VS Code’s editor component in the browser.",
+    "category": "API & code",
+    "launchUrl": "https://microsoft.github.io/monaco-editor/playground.html",
+    "sourceRepo": "microsoft/monaco-editor",
+    "sourceUrl": "https://github.com/microsoft/monaco-editor",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v0.56.0",
+      "publishedAt": "2026-07-20T13:19:02Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "codemirror",
+    "name": "CodeMirror",
+    "description": "Lightweight, extensible browser code editor examples.",
+    "category": "API & code",
+    "launchUrl": "https://codemirror.net/try/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": null
+  },
+  {
+    "slug": "revealjs",
+    "name": "Reveal.js",
+    "description": "Create and present HTML or Markdown slide decks.",
+    "category": "Documents",
+    "launchUrl": "https://revealjs.com/demo/",
+    "sourceRepo": "hakimel/reveal.js",
+    "sourceUrl": "https://github.com/hakimel/reveal.js",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "6.0.1",
+      "publishedAt": "2026-04-11T07:23:10Z"
+    },
+    "defaultBranch": "master"
+  },
+  {
+    "slug": "graphviz",
+    "name": "Graphviz WASM",
+    "description": "Render precise DOT graphs and diagrams in-browser.",
+    "category": "Diagrams",
+    "launchUrl": "https://hpcc-systems.github.io/hpcc-js-wasm/",
+    "sourceRepo": "hpcc-systems/hpcc-js-wasm",
+    "sourceUrl": "https://github.com/hpcc-systems/hpcc-js-wasm",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "wasm-v2.35.0",
+      "publishedAt": "2026-07-24T10:39:44Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "drawio",
+    "name": "diagrams.net / draw.io",
+    "description": "Full diagram editor from Wayne’s synced Draw.io deployment.",
+    "category": "Diagrams",
+    "launchUrl": "https://wayner84.github.io/drawio/src/main/webapp/",
+    "sourceRepo": "jgraph/drawio",
+    "sourceUrl": "https://github.com/jgraph/drawio",
+    "license": "Apache-2.0",
+    "hosting": "wayne-hosted",
+    "tracked": {
+      "kind": "release",
+      "value": "v31.1.8",
+      "publishedAt": "2026-08-06T23:44:57Z"
+    },
+    "defaultBranch": "dev"
+  },
+  {
+    "slug": "regex101",
+    "name": "Regex101",
+    "description": "Build, explain and debug regular expressions.",
+    "category": "Developer",
+    "launchUrl": "https://regex101.com/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "caniuse",
+    "name": "Can I Use",
+    "description": "Check browser support for web platform features.",
+    "category": "Developer",
+    "launchUrl": "https://caniuse.com/",
+    "sourceRepo": "Fyrd/caniuse",
+    "sourceUrl": "https://github.com/Fyrd/caniuse",
+    "license": "CC-BY-4.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "923dc04b5651bb7d612dcc224bd918ba37d34eb7",
+      "publishedAt": "2026-08-07T08:30:42Z"
+    },
+    "defaultBranch": "main"
+  },
+  {
+    "slug": "crontab-guru",
+    "name": "Crontab Guru",
+    "description": "Build and explain cron schedule expressions.",
+    "category": "Developer",
+    "launchUrl": "https://crontab.guru/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary",
+    "hosting": "external-service",
+    "tracked": null
+  },
+  {
+    "slug": "diffchecker",
+    "name": "Diff Checker",
+    "description": "Compare text, files and code quickly.",
+    "category": "Developer",
+    "launchUrl": "https://www.diffchecker.com/text-compare/",
+    "sourceRepo": null,
+    "sourceUrl": null,
+    "license": "Proprietary",
+    "hosting": "external-service",
+    "tracked": null
+  }
+]

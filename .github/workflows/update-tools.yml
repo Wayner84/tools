@@ -1,0 +1,28 @@
+name: Update upstream metadata
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Refresh release and commit metadata
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run update-tools
+      - run: npm test
+      - name: Commit changes
+        run: |
+          if git diff --quiet; then echo "Already current"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/tools.json
+          git commit -m "chore: refresh upstream tool metadata"
+          git push
