@@ -138,9 +138,9 @@
   {
     "slug": "browserpdf",
     "name": "BrowserPDF",
-    "description": "Convert and edit PDFs entirely in the browser.",
+    "description": "Browser-based PDF tools; external-only because no canonical source licence is published.",
     "category": "Documents",
-    "launchUrl": "https://browserpdf.com/",
+    "launchUrl": "https://browser-pdf.com/",
     "sourceRepo": null,
     "sourceUrl": null,
     "license": "Proprietary/unknown",
@@ -152,24 +152,34 @@
     "name": "MD2PDF",
     "description": "Convert Markdown to PDF with a live preview.",
     "category": "Documents",
-    "launchUrl": "https://md2pdf.netlify.app/",
-    "sourceRepo": null,
-    "sourceUrl": null,
-    "license": "Unknown",
-    "hosting": "external-service",
-    "tracked": null
+    "launchUrl": "https://realdennis.github.io/md2pdf/",
+    "sourceRepo": "realdennis/md2pdf",
+    "sourceUrl": "https://github.com/realdennis/md2pdf",
+    "license": "MIT",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "3d81c663d080a1f3832dcbece5e8c7fb3b976dce",
+      "publishedAt": "2025-08-06T12:55:21Z"
+    },
+    "defaultBranch": "master"
   },
   {
     "slug": "sqlite-viewer",
     "name": "SQLite Viewer",
     "description": "Open, inspect and query SQLite databases in-browser.",
     "category": "Data & crypto",
-    "launchUrl": "https://sqliteviewer.app/",
-    "sourceRepo": null,
-    "sourceUrl": null,
-    "license": "Proprietary/unknown",
-    "hosting": "external-service",
-    "tracked": null
+    "launchUrl": "https://inloop.github.io/sqlite-viewer/",
+    "sourceRepo": "inloop/sqlite-viewer",
+    "sourceUrl": "https://github.com/inloop/sqlite-viewer",
+    "license": "Apache-2.0",
+    "hosting": "official-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "4a7868455d28fe8c251af364006c3881a9d23d00",
+      "publishedAt": "2024-03-05T14:43:02Z"
+    },
+    "defaultBranch": "gh-pages"
   },
   {
     "slug": "svgomg",
@@ -275,7 +285,7 @@
     "category": "API & code",
     "launchUrl": "https://codemirror.net/try/",
     "sourceRepo": null,
-    "sourceUrl": null,
+    "sourceUrl": "https://code.haverbeke.berlin/codemirror/",
     "license": "MIT",
     "hosting": "official-hosted",
     "tracked": null
