@@ -62,8 +62,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "10ef944db6a46500e1684873b27cfed790d1035d",
-      "publishedAt": "2026-08-14T13:01:21Z"
+      "value": "756a7bfdc24825fc22ab48493985a0f2b768b49b",
+      "publishedAt": "2026-08-25T12:41:54Z"
     },
     "defaultBranch": "develop"
   },
