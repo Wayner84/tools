@@ -130,8 +130,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v2.8.7",
-      "publishedAt": "2026-07-27T07:40:35Z"
+      "value": "v2.8.8",
+      "publishedAt": "2026-08-29T09:26:27Z"
     },
     "defaultBranch": "main"
   },
