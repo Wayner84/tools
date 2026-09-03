@@ -256,8 +256,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "v5.3.2",
-      "publishedAt": "2026-08-18T10:00:14Z"
+      "value": "v5.4.0",
+      "publishedAt": "2026-09-02T11:04:14Z"
     },
     "defaultBranch": "main"
   },
