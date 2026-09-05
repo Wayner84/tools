@@ -96,8 +96,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v5.32.14",
-      "publishedAt": "2026-08-18T12:12:37Z"
+      "value": "v5.32.15",
+      "publishedAt": "2026-09-04T10:12:37Z"
     },
     "defaultBranch": "main"
   },
@@ -319,8 +319,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "wasm-v2.35.0",
-      "publishedAt": "2026-07-24T10:39:44Z"
+      "value": "wasm-v2.35.1",
+      "publishedAt": "2026-09-04T19:49:01Z"
     },
     "defaultBranch": "main"
   },
