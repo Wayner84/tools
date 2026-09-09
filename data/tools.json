@@ -14,7 +14,20 @@
       "value": "v11.4.0",
       "publishedAt": "2026-08-18T18:50:36Z"
     },
-    "defaultBranch": "master"
+    "defaultBranch": "master",
+    "destinationType": "application",
+    "operator": "CyberChef project",
+    "aliases": [
+      "base64",
+      "hash",
+      "encryption",
+      "compression",
+      "encoding",
+      "decode",
+      "JWT"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "it-tools",
@@ -31,7 +44,20 @@
       "value": "v2024.10.22-7ca5933",
       "publishedAt": "2024-10-22T09:58:03Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "tool collection",
+    "operator": "IT-Tools project",
+    "aliases": [
+      "QR code",
+      "subnet calculator",
+      "base64",
+      "hash",
+      "JWT",
+      "text converter",
+      "network"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "excalidraw",
@@ -48,7 +74,16 @@
       "value": "v0.18.1",
       "publishedAt": "2026-04-21T08:43:20Z"
     },
-    "defaultBranch": "master"
+    "defaultBranch": "master",
+    "destinationType": "application",
+    "operator": "Excalidraw project",
+    "aliases": [
+      "whiteboard",
+      "sketch",
+      "fixture diagram"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "mermaid",
@@ -65,7 +100,16 @@
       "value": "756a7bfdc24825fc22ab48493985a0f2b768b49b",
       "publishedAt": "2026-08-25T12:41:54Z"
     },
-    "defaultBranch": "develop"
+    "defaultBranch": "develop",
+    "destinationType": "application",
+    "operator": "Mermaid Live Editor project",
+    "aliases": [
+      "flowchart",
+      "sequence diagram",
+      "text diagram"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "jsoncrack",
@@ -82,12 +126,23 @@
       "value": "v5.0.0",
       "publishedAt": "2026-03-11T11:14:55Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "JSON Crack project",
+    "aliases": [
+      "JSON viewer",
+      "YAML",
+      "XML",
+      "CSV",
+      "data diagram"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "swagger-ui",
-    "name": "Swagger UI",
-    "description": "Explore and test OpenAPI documentation interactively.",
+    "name": "Swagger Petstore demo",
+    "description": "Explore Swagger UI through its Petstore demonstration; requests can contact the demonstration API.",
     "category": "API & code",
     "launchUrl": "https://petstore.swagger.io/",
     "sourceRepo": "swagger-api/swagger-ui",
@@ -99,7 +154,16 @@
       "value": "v5.32.15",
       "publishedAt": "2026-09-04T10:12:37Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "demo",
+    "operator": "Swagger project",
+    "aliases": [
+      "OpenAPI",
+      "API documentation",
+      "Petstore"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "hoppscotch",
@@ -116,7 +180,17 @@
       "value": "2026.8.0",
       "publishedAt": "2026-08-28T14:30:09Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "external service",
+    "operator": "Hoppscotch",
+    "aliases": [
+      "REST client",
+      "GraphQL",
+      "API test",
+      "websocket"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "bentopdf",
@@ -133,19 +207,37 @@
       "value": "v2.8.8",
       "publishedAt": "2026-08-29T09:26:27Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "BentoPDF project",
+    "aliases": [
+      "PDF merge",
+      "PDF split",
+      "PDF convert",
+      "document"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "browserpdf",
-    "name": "BrowserPDF",
-    "description": "Browser-based PDF tools; external-only because no canonical source licence is published.",
+    "name": "BrowserPDF image-to-PDF service",
+    "description": "Japanese-language third-party service focused on converting images to PDF; operator and source licence are not verified.",
     "category": "Documents",
     "launchUrl": "https://browser-pdf.com/",
     "sourceRepo": null,
     "sourceUrl": null,
     "license": "Proprietary/unknown",
     "hosting": "external-service",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "external service",
+    "operator": "BrowserPDF (operator not verified)",
+    "aliases": [
+      "image to PDF",
+      "Japanese PDF service"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "md2pdf",
@@ -162,7 +254,15 @@
       "value": "3d81c663d080a1f3832dcbece5e8c7fb3b976dce",
       "publishedAt": "2025-08-06T12:55:21Z"
     },
-    "defaultBranch": "master"
+    "defaultBranch": "master",
+    "destinationType": "application",
+    "operator": "MD2PDF project",
+    "aliases": [
+      "Markdown PDF",
+      "print document"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "sqlite-viewer",
@@ -179,7 +279,16 @@
       "value": "4a7868455d28fe8c251af364006c3881a9d23d00",
       "publishedAt": "2024-03-05T14:43:02Z"
     },
-    "defaultBranch": "gh-pages"
+    "defaultBranch": "gh-pages",
+    "destinationType": "application",
+    "operator": "SQLite Viewer project",
+    "aliases": [
+      "database viewer",
+      "SQL query",
+      "SQLite"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "svgomg",
@@ -196,7 +305,15 @@
       "value": "f925656d40a507c512bf95ee14ad16445a4ad3ed",
       "publishedAt": "2025-09-29T08:30:27Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "SVGOMG project",
+    "aliases": [
+      "SVG optimise",
+      "vector compress"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "squoosh",
@@ -213,7 +330,17 @@
       "value": "e8d35e0fb66eb16eff6fe8fc773eabcbb7128de3",
       "publishedAt": "2024-08-19T07:50:41Z"
     },
-    "defaultBranch": "dev"
+    "defaultBranch": "dev",
+    "destinationType": "application",
+    "operator": "Squoosh project",
+    "aliases": [
+      "image compress",
+      "resize",
+      "WebP",
+      "AVIF"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "photopea",
@@ -225,7 +352,16 @@
     "sourceUrl": null,
     "license": "Proprietary",
     "hosting": "external-service",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "external service",
+    "operator": "Photopea",
+    "aliases": [
+      "image editor",
+      "PSD",
+      "photo editing"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "jspaint",
@@ -242,7 +378,16 @@
       "value": "v1.1.0",
       "publishedAt": "2026-04-10T02:46:52Z"
     },
-    "defaultBranch": "master"
+    "defaultBranch": "master",
+    "destinationType": "application",
+    "operator": "JS Paint project",
+    "aliases": [
+      "paint",
+      "image annotation",
+      "drawing"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "tldraw",
@@ -259,12 +404,21 @@
       "value": "v5.4.1",
       "publishedAt": "2026-09-08T10:52:18Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "external service",
+    "operator": "tldraw",
+    "aliases": [
+      "whiteboard",
+      "infinite canvas",
+      "diagram"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "monaco",
-    "name": "Monaco Editor",
-    "description": "Try VS Code’s editor component in the browser.",
+    "name": "Monaco Editor playground",
+    "description": "Developer playground for trying and configuring the editor component used by VS Code.",
     "category": "API & code",
     "launchUrl": "https://microsoft.github.io/monaco-editor/playground.html",
     "sourceRepo": "microsoft/monaco-editor",
@@ -276,24 +430,42 @@
       "value": "v0.56.0",
       "publishedAt": "2026-07-20T13:19:02Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "playground",
+    "operator": "Microsoft Monaco Editor project",
+    "aliases": [
+      "editor component",
+      "VS Code editor",
+      "code example"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "codemirror",
-    "name": "CodeMirror",
-    "description": "Lightweight, extensible browser code editor examples.",
+    "name": "CodeMirror playground",
+    "description": "Developer playground with examples for the embeddable CodeMirror editor component.",
     "category": "API & code",
     "launchUrl": "https://codemirror.net/try/",
     "sourceRepo": null,
     "sourceUrl": "https://code.haverbeke.berlin/codemirror/",
     "license": "MIT",
     "hosting": "official-hosted",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "playground",
+    "operator": "CodeMirror project",
+    "aliases": [
+      "editor component",
+      "code example",
+      "developer playground"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "revealjs",
-    "name": "Reveal.js",
-    "description": "Create and present HTML or Markdown slide decks.",
+    "name": "Reveal.js framework demo",
+    "description": "Demonstration and reference for the Reveal.js HTML presentation framework.",
     "category": "Documents",
     "launchUrl": "https://revealjs.com/demo/",
     "sourceRepo": "hakimel/reveal.js",
@@ -305,12 +477,21 @@
       "value": "6.0.1",
       "publishedAt": "2026-04-11T07:23:10Z"
     },
-    "defaultBranch": "master"
+    "defaultBranch": "master",
+    "destinationType": "demo",
+    "operator": "Reveal.js project",
+    "aliases": [
+      "presentation framework",
+      "HTML slides",
+      "Markdown slides"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "graphviz",
-    "name": "Graphviz WASM",
-    "description": "Render precise DOT graphs and diagrams in-browser.",
+    "name": "Graphviz WASM documentation",
+    "description": "Library documentation and examples for rendering Graphviz DOT with WebAssembly; not a ready graph editor.",
     "category": "Diagrams",
     "launchUrl": "https://hpcc-systems.github.io/hpcc-js-wasm/",
     "sourceRepo": "hpcc-systems/hpcc-js-wasm",
@@ -322,7 +503,16 @@
       "value": "wasm-v2.35.1",
       "publishedAt": "2026-09-04T19:49:01Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "documentation",
+    "operator": "HPCC Systems hpcc-js-wasm project",
+    "aliases": [
+      "DOT graph",
+      "Graphviz library",
+      "diagram library"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "drawio",
@@ -339,7 +529,17 @@
       "value": "v31.4.5",
       "publishedAt": "2026-09-08T15:04:34Z"
     },
-    "defaultBranch": "dev"
+    "defaultBranch": "dev",
+    "destinationType": "application",
+    "operator": "Wayne-hosted diagrams.net deployment",
+    "aliases": [
+      "technical drawing",
+      "diagram editor",
+      "flowchart",
+      "network diagram"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Separate Wayne-hosted deployment outside this portal; review that application before using sensitive data."
   },
   {
     "slug": "regex101",
@@ -351,7 +551,16 @@
     "sourceUrl": null,
     "license": "Proprietary",
     "hosting": "external-service",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "external service",
+    "operator": "Regex101",
+    "aliases": [
+      "regular expression",
+      "regex debugger",
+      "log parsing"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "caniuse",
@@ -368,7 +577,15 @@
       "value": "fb9613d041c25361db6e8dbb3f644fd2546ac667",
       "publishedAt": "2026-08-24T20:03:49Z"
     },
-    "defaultBranch": "main"
+    "defaultBranch": "main",
+    "destinationType": "reference",
+    "operator": "Can I Use project",
+    "aliases": [
+      "browser compatibility",
+      "web platform support"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Upstream-hosted site outside Tool Deck; source availability does not guarantee local-only processing or no telemetry."
   },
   {
     "slug": "crontab-guru",
@@ -380,7 +597,15 @@
     "sourceUrl": null,
     "license": "Proprietary",
     "hosting": "external-service",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "external service",
+    "operator": "Crontab Guru",
+    "aliases": [
+      "cron expression",
+      "schedule"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
     "slug": "diffchecker",
@@ -392,6 +617,15 @@
     "sourceUrl": null,
     "license": "Proprietary",
     "hosting": "external-service",
-    "tracked": null
+    "tracked": null,
+    "destinationType": "external service",
+    "operator": "Diffchecker",
+    "aliases": [
+      "text diff",
+      "file compare",
+      "code compare"
+    ],
+    "functionalCheck": "2026-09-08: destination landing page opened; not a full functionality, security or privacy audit.",
+    "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   }
 ]

@@ -6,11 +6,11 @@ A public launchpad for browser-based engineering, diagramming, developer, docume
 
 ## What this repository hosts
 
-This repository hosts the dashboard and stable launch routes—not copies of all upstream applications. Each `/tools/<slug>/` route forwards to one of:
+This repository hosts the dashboard and stable launch routes—not copies of all upstream applications. Each card identifies the destination type and one of these hosting boundaries:
 
-- **WAYNE** — Wayne’s own deployment, currently diagrams.net/draw.io.
-- **OFFICIAL** — the upstream project’s canonical hosted app.
-- **EXTERNAL** — a third-party web service which may have its own accounts, telemetry or privacy policy.
+- **WAYNE-HOSTED** — Wayne’s own deployment, currently diagrams.net/draw.io.
+- **UPSTREAM-HOSTED** — the upstream project’s canonical hosted app, demo, playground, documentation or reference.
+- **EXTERNAL SERVICE** — a third-party web service which may have its own accounts, telemetry or privacy policy.
 
 This avoids brittle iframes, incompatible monorepo builds, licensing confusion and running untrusted upstream build scripts. Browser-only apps often process files locally, but users should check each external app’s policy before opening sensitive data.
 
@@ -28,7 +28,15 @@ Then open `http://localhost:4173/tools/`.
 
 ## Adding a tool
 
-Add one record to `data/tools.json`. Slugs must be unique lowercase kebab-case; URLs must use HTTPS. Run `npm test` to regenerate and verify every route. Do not hand-edit generated `dist/`.
+Add one record to `data/tools.json`. Each record requires:
+
+- a unique lowercase kebab-case `slug`;
+- HTTPS `launchUrl` and, when available, HTTPS `sourceUrl`;
+- `name`, `description`, `category`, `hosting`, `license`, `destinationType` and `operator`;
+- searchable string `aliases`;
+- honest `functionalCheck` and `dataBoundary` text.
+
+Run `npm test` and `npm run build` to validate the catalogue and generate every stable route. Do not hand-edit generated `dist/`.
 
 ## Staying current
 

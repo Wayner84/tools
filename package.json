@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test",
+    "test": "node --test --test-concurrency=1",
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
     "update-tools": "node scripts/update-tools.mjs"

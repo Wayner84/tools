@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -18,11 +19,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run update-tools
       - run: npm test
+      - run: npm run build
       - name: Commit changes
+        id: commit
         run: |
-          if git diff --quiet; then echo "Already current"; exit 0; fi
+          if git diff --quiet; then
+            echo "Already current"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/tools.json
           git commit -m "chore: refresh upstream tool metadata"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy updated catalogue
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run pages.yml --ref main
