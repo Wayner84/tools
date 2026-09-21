@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "8754416d847d2947c0492bc045cddbab717a51ea",
-      "publishedAt": "2026-09-19T02:54:23Z"
+      "value": "77f9a7c32d8716f034db4d45f9b06362a2cae15d",
+      "publishedAt": "2026-09-21T04:57:17Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
