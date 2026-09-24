@@ -526,8 +526,8 @@
     "hosting": "wayne-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v31.4.6",
-      "publishedAt": "2026-09-16T21:49:02Z"
+      "value": "v31.5.2",
+      "publishedAt": "2026-09-23T18:13:03Z"
     },
     "defaultBranch": "dev",
     "destinationType": "application",
@@ -574,8 +574,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "64ab4a1d960b15cc2edeb3225150206a5b23d120",
-      "publishedAt": "2026-09-15T15:36:52Z"
+      "value": "f533da4c77efd0c1b2f159421596993750c7d6ca",
+      "publishedAt": "2026-09-24T03:36:36Z"
     },
     "defaultBranch": "main",
     "destinationType": "reference",
