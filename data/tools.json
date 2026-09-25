@@ -427,8 +427,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v0.56.0",
-      "publishedAt": "2026-07-20T13:19:02Z"
+      "value": "v0.57.0",
+      "publishedAt": "2026-09-24T21:25:23Z"
     },
     "defaultBranch": "main",
     "destinationType": "playground",
