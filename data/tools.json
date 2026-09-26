@@ -526,8 +526,8 @@
     "hosting": "wayne-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v31.5.2",
-      "publishedAt": "2026-09-23T18:13:03Z"
+      "value": "v31.5.3",
+      "publishedAt": "2026-09-25T23:22:50Z"
     },
     "defaultBranch": "dev",
     "destinationType": "application",
