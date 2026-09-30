@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "1ab7e2e0740a4380172df93bb707538521c14b15",
-      "publishedAt": "2026-09-22T08:13:11Z"
+      "value": "5db1112e6a3cc5df76f070256a39fbd902e9b30d",
+      "publishedAt": "2026-09-30T05:24:33Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -401,8 +401,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "v5.4.2",
-      "publishedAt": "2026-09-10T12:05:52Z"
+      "value": "v5.5.0",
+      "publishedAt": "2026-09-30T10:03:53Z"
     },
     "defaultBranch": "main",
     "destinationType": "external service",
@@ -500,8 +500,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "wasm-v2.35.2",
-      "publishedAt": "2026-09-14T09:48:58Z"
+      "value": "wasm-v2.35.3",
+      "publishedAt": "2026-09-29T11:31:19Z"
     },
     "defaultBranch": "main",
     "destinationType": "documentation",
@@ -574,8 +574,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "beaa65d30a27fdc140a8fbd48b1589ec005c45e6",
-      "publishedAt": "2026-09-28T05:48:27Z"
+      "value": "4c276be8460f477d100e55cf39639478951e64d1",
+      "publishedAt": "2026-09-30T05:40:48Z"
     },
     "defaultBranch": "main",
     "destinationType": "reference",
