@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "d46f60bc0fd6b71a56dc73c1711c7b4313b81310",
-      "publishedAt": "2026-10-12T04:21:56Z"
+      "value": "dd95c0328556e83ae42f6ee58d294c0badd922d9",
+      "publishedAt": "2026-10-13T12:41:32Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -574,8 +574,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "e7ddc557408a5caa830e3e2949a302361f5b37c6",
-      "publishedAt": "2026-10-07T05:16:35Z"
+      "value": "6ed49c64cdbdfeb9cfae5481eef01ec57c2d6025",
+      "publishedAt": "2026-10-13T05:13:35Z"
     },
     "defaultBranch": "main",
     "destinationType": "reference",
