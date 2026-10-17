@@ -1,7 +1,7 @@
 const FAVOURITES_KEY = 'tool-favourites';
 const SLUG_PATTERN = /^[a-z0-9-]+$/;
 const HOSTING_TYPES = new Set(['wayne-hosted', 'official-hosted', 'external-service']);
-const DESTINATION_TYPES = new Set(['application', 'tool collection', 'demo', 'external service', 'playground', 'documentation', 'reference']);
+const DESTINATION_TYPES = new Set(['application', 'tool collection', 'demo', 'external service', 'playground', 'documentation', 'reference', 'worksheet']);
 const REQUIRED_STRINGS = ['name', 'description', 'category', 'hosting', 'license', 'launchUrl', 'destinationType', 'operator', 'dataBoundary', 'functionalCheck'];
 
 function isSafeHttpsUrl(value) {
@@ -28,6 +28,12 @@ export function validateCatalogue(catalogue) {
     if (!DESTINATION_TYPES.has(tool.destinationType)) throw new Error(`Invalid destinationType for ${tool.slug}`);
     if (!isSafeHttpsUrl(tool.launchUrl)) throw new Error(`Invalid launchUrl for ${tool.slug}`);
     if (tool.sourceUrl != null && !isSafeHttpsUrl(tool.sourceUrl)) throw new Error(`Invalid sourceUrl for ${tool.slug}`);
+    if (tool.implementation != null && tool.implementation !== 'native') throw new Error(`Invalid implementation for ${tool.slug}`);
+    if (tool.implementation === 'native') {
+      if (tool.hosting !== 'wayne-hosted') throw new Error(`Native ${tool.slug} must be wayne-hosted`);
+      if (tool.sourceUrl !== 'https://github.com/Wayner84/tools') throw new Error(`Native ${tool.slug} must use the Tool Deck sourceUrl`);
+      if (tool.destinationType !== 'worksheet') throw new Error(`Native ${tool.slug} must be a worksheet`);
+    }
     if (!Array.isArray(tool.aliases) || tool.aliases.some((alias) => typeof alias !== 'string')) throw new Error(`Invalid aliases for ${tool.slug}`);
   }
   return catalogue;

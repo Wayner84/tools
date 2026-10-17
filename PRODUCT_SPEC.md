@@ -5,7 +5,7 @@ Create a public, static GitHub Pages portal at `https://wayner84.github.io/tools
 
 ## Repository
 - GitHub: `Wayner84/tools`
-- Local: `W:/04_Software_Projects/Websites/tools`
+- Local: `W:/04_Software_Projects/01_Projects/Web/tools`
 - Hosting: GitHub Pages via GitHub Actions
 - No secrets or user data in the repository.
 

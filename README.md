@@ -6,13 +6,13 @@ A public launchpad for browser-based engineering, diagramming, developer, docume
 
 ## What this repository hosts
 
-This repository hosts the dashboard and stable launch routes—not copies of all upstream applications. Each card identifies the destination type and one of these hosting boundaries:
+This repository hosts the dashboard, stable launch routes and 22 dependency-free engineering worksheets that run locally in the browser. It does not copy the linked upstream applications. Each card identifies the destination type and one of these hosting boundaries:
 
-- **WAYNE-HOSTED** — Wayne’s own deployment, currently diagrams.net/draw.io.
+- **WAYNE-HOSTED** — Wayne’s own deployments, including the native engineering worksheets and diagrams.net/draw.io.
 - **UPSTREAM-HOSTED** — the upstream project’s canonical hosted app, demo, playground, documentation or reference.
 - **EXTERNAL SERVICE** — a third-party web service which may have its own accounts, telemetry or privacy policy.
 
-This avoids brittle iframes, incompatible monorepo builds, licensing confusion and running untrusted upstream build scripts. Browser-only apps often process files locally, but users should check each external app’s policy before opening sensitive data.
+This avoids brittle iframes, incompatible monorepo builds, licensing confusion and running untrusted upstream build scripts. The native worksheets perform their calculations and file parsing in the current browser tab without uploading inputs. For linked external apps, users should check the destination’s policy before opening sensitive data.
 
 ## Development
 
@@ -35,6 +35,8 @@ Add one record to `data/tools.json`. Each record requires:
 - `name`, `description`, `category`, `hosting`, `license`, `destinationType` and `operator`;
 - searchable string `aliases`;
 - honest `functionalCheck` and `dataBoundary` text.
+
+Native worksheets additionally use `implementation: "native"`, `destinationType: "worksheet"`, `hosting: "wayne-hosted"` and the Tool Deck repository as `sourceUrl`. Their implementation and accessible form definition live in `src/native-tools.js`; shared presentation is in `src/native-tool.css`.
 
 Run `npm test` and `npm run build` to validate the catalogue and generate every stable route. Do not hand-edit generated `dist/`.
 
