@@ -690,7 +690,13 @@
       "mesh"
     ],
     "functionalCheck": "2026-09-08: destination opened; format paths, dimensional accuracy and every importer were not certified.",
-    "dataBoundary": "Upstream-hosted application outside Tool Deck. Treat CAD files as disclosed to that operator unless its current processing and storage behavior has been independently verified."
+    "dataBoundary": "Upstream-hosted application outside Tool Deck. Treat CAD files as disclosed to that operator unless its current processing and storage behavior has been independently verified.",
+    "tracked": {
+      "kind": "release",
+      "value": "0.18.0",
+      "publishedAt": "2025-12-18T15:46:13Z"
+    },
+    "defaultBranch": "master"
   },
   {
     "slug": "openscad-playground",
@@ -712,7 +718,13 @@
       "jig"
     ],
     "functionalCheck": "2026-09-08: playground opened; supported syntax, libraries and desktop parity remain governed by upstream limitations.",
-    "dataBoundary": "Upstream-hosted application outside Tool Deck. Scripts or browser storage may retain designs, and untrusted models can consume browser resources."
+    "dataBoundary": "Upstream-hosted application outside Tool Deck. Scripts or browser storage may retain designs, and untrusted models can consume browser resources.",
+    "tracked": {
+      "kind": "commit",
+      "value": "012111f06bb6d8dac2b8d30318512494d87d6932",
+      "publishedAt": "2026-07-16T09:56:32Z"
+    },
+    "defaultBranch": "main"
   },
   {
     "slug": "kiri-moto",
