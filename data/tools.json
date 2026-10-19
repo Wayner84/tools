@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "dd95c0328556e83ae42f6ee58d294c0badd922d9",
-      "publishedAt": "2026-10-13T12:41:32Z"
+      "value": "ddd7c8ea27e644dc1ba8bc0dce22f2855de1cbe1",
+      "publishedAt": "2026-10-19T07:24:56Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -204,8 +204,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v2.8.8",
-      "publishedAt": "2026-08-29T09:26:27Z"
+      "value": "v2.8.10",
+      "publishedAt": "2026-10-19T10:14:20Z"
     },
     "defaultBranch": "main",
     "destinationType": "application",
@@ -526,8 +526,8 @@
     "hosting": "wayne-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v32.4.1",
-      "publishedAt": "2026-10-08T21:49:28Z"
+      "value": "v32.5.5",
+      "publishedAt": "2026-10-18T10:54:09Z"
     },
     "defaultBranch": "dev",
     "destinationType": "application",
