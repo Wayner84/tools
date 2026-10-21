@@ -629,6 +629,29 @@
     "dataBoundary": "Third-party service outside Tool Deck; network, account, storage and telemetry behaviour depends on that service."
   },
   {
+    "slug": "coordinate-geometry",
+    "name": "Coordinate geometry calculator",
+    "description": "Calculate a circle through three XY points or the angle between two lines defined by four measured points.",
+    "category": "Engineering",
+    "launchUrl": "https://wayner84.github.io/tools/coordinate-geometry/",
+    "sourceUrl": "https://github.com/Wayner84/coordinate-geometry-calculator",
+    "license": "MIT",
+    "hosting": "wayne-hosted",
+    "destinationType": "worksheet",
+    "operator": "Wayne",
+    "aliases": [
+      "three point circle",
+      "circumcircle",
+      "circle radius",
+      "angle between lines",
+      "XY coordinates",
+      "metrology"
+    ],
+    "functionalCheck": "2026-10-21: circle, collinear, line-angle, parallel and zero-length cases are covered by automated numerical tests.",
+    "dataBoundary": "Runs locally in this browser tab; entered coordinates are not uploaded, retained or sent to analytics.",
+    "implementation": "native"
+  },
+  {
     "slug": "bolt-circle",
     "name": "Bolt-circle and hole-pattern coordinate worksheet",
     "description": "Generate equal-spaced 2D hole coordinates from an explicit origin, diameter, start angle and direction.",

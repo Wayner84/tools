@@ -189,8 +189,8 @@ const batch3Slugs = [
 
 test('batch 3 integrates exactly six Wayne-hosted native catalogue records', async () => {
   const catalogue = JSON.parse(await readFile('data/tools.json', 'utf8'));
-  assert.equal(catalogue.length, 50);
-  assert.equal(catalogue.filter((tool) => tool.implementation === 'native').length, 22);
+  assert.equal(catalogue.length, 51);
+  assert.equal(catalogue.filter((tool) => tool.implementation === 'native').length, 23);
   const records = catalogue.filter((tool) => batch3Slugs.includes(tool.slug));
   assert.equal(records.length, 6);
   for (const record of records) {

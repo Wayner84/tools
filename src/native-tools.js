@@ -816,6 +816,40 @@ export function generateInspectionReportFromCsv({ csv, mapping, unit }) {
   return { rows, csv: [headings.join(','), ...outputRows].join('\n') + '\n', rawInput: csv, unit, decisionRule: 'Plain inclusive comparison to nominal plus stated lower/upper tolerances; measurement uncertainty is not included.' };
 }
 
+function requireGeometryPoints(points, count) {
+  if (!Array.isArray(points) || points.length !== count) throw new RangeError(`Exactly ${count} points are required`);
+  const coordinates = points.flatMap((point) => [point?.x, point?.y]);
+  requireFinite(coordinates);
+}
+
+export function calculateCircleGeometry(points) {
+  requireGeometryPoints(points, 3);
+  const [a,b,c]=points;
+  const determinant=2*(a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y));
+  const scale=Math.max(1,...points.flatMap((point)=>[Math.abs(point.x),Math.abs(point.y)]));
+  if(Math.abs(determinant)<=1e-12*scale*scale) throw new RangeError('The three points are collinear or too close to a straight line');
+  const aa=a.x*a.x+a.y*a.y,bb=b.x*b.x+b.y*b.y,cc=c.x*c.x+c.y*c.y;
+  const centre={
+    x:(aa*(b.y-c.y)+bb*(c.y-a.y)+cc*(a.y-b.y))/determinant,
+    y:(aa*(c.x-b.x)+bb*(a.x-c.x)+cc*(b.x-a.x))/determinant,
+  };
+  const radius=Math.hypot(a.x-centre.x,a.y-centre.y);
+  return requireFiniteResults({centre,radius,diameter:radius*2},'Coordinate-circle result');
+}
+
+export function calculateLineAngles(points) {
+  requireGeometryPoints(points, 4);
+  const [a,b,c,d]=points;
+  const first={x:b.x-a.x,y:b.y-a.y},second={x:d.x-c.x,y:d.y-c.y};
+  const firstLength=Math.hypot(first.x,first.y),secondLength=Math.hypot(second.x,second.y);
+  if(!(firstLength>0)||!(secondLength>0)) throw new RangeError('Each line needs two different points; zero length is not valid');
+  const dot=first.x*second.x+first.y*second.y,cross=first.x*second.y-first.y*second.x;
+  const smallerDegrees=Math.atan2(Math.abs(cross),Math.abs(dot))*180/Math.PI;
+  const directedDegrees=Math.atan2(Math.abs(cross),dot)*180/Math.PI;
+  const direction=(vector)=>((Math.atan2(vector.y,vector.x)*180/Math.PI)%180+180)%180;
+  return requireFiniteResults({smallerDegrees,supplementaryDegrees:180-smallerDegrees,directedDegrees,firstDirectionDegrees:direction(first),secondDirectionDegrees:direction(second),firstLength,secondLength},'Coordinate-line-angle result');
+}
+
 export function calculateBoltCircle({ diameter, holes, startAngle, originX, originY, direction }) {
   requireFinite([diameter, holes, startAngle, originX, originY]);
   if (diameter <= 0) throw new RangeError('Diameter must be greater than zero');
@@ -917,6 +951,29 @@ export function calculateSineBar({ centreDistance, angleDegrees, stackHeight, ce
 }
 
 export const NATIVE_TOOL_DEFINITIONS = {
+  'coordinate-geometry': {
+    formula: 'Circle: solve the circumcentre through points 1–3. Lines: vectors 1→2 and 3→4; smaller angle = atan2(|cross|, |dot|).',
+    assumptions: ['All coordinates are Cartesian XY values in one common unit and plane.', 'Circle mode uses points 1–3 and ignores point 4.', 'Line mode treats point pairs 1–2 and 3–4 as infinite lines; directions are anticlockwise from +X and normalised to 0°–180°.'],
+    limitations: ['Collinear three-point circles and zero-length lines are rejected.', 'No uncertainty, best-fit circle/line, 3D projection, datum alignment or coordinate-system transformation is included.', 'The worksheet displays up to six decimal places; use the full-precision source calculations when chaining results.'],
+    fields: [
+      ['mode','Calculation','circle',[['circle','Circle through points 1–3'],['lines','Angle between lines 1–2 and 3–4']]],
+      ['x1','Point 1 / A — X',0,'any'],['y1','Point 1 / A — Y',0,'any'],
+      ['x2','Point 2 / B — X',10,'any'],['y2','Point 2 / B — Y',0,'any'],
+      ['x3','Point 3 / C — X',5,'any'],['y3','Point 3 / C — Y',5,'any'],
+      ['x4','Point 4 / D — X',10,'any'],['y4','Point 4 / D — Y',10,'any'],
+    ],
+    run(values) {
+      const numeric=numberValues(values,['x1','y1','x2','y2','x3','y3','x4','y4']);
+      const points=[1,2,3,4].map((index)=>({x:numeric[`x${index}`],y:numeric[`y${index}`]}));
+      if(values.mode==='circle'){
+        const result=calculateCircleGeometry(points.slice(0,3));
+        return {lines:[['Centre X',format(result.centre.x)],['Centre Y',format(result.centre.y)],['Radius R',format(result.radius)],['Diameter Ø',format(result.diameter)]],warnings:['Results use the same coordinate unit entered above.']};
+      }
+      if(values.mode!=='lines') throw new RangeError('Choose circle or lines mode');
+      const result=calculateLineAngles(points);
+      return {lines:[['Smaller angle between lines',`${format(result.smallerDegrees)}°`],['Other angle',`${format(result.supplementaryDegrees)}°`],['Directed 1→2 to 3→4 angle',`${format(result.directedDegrees)}°`],['Line 1 direction',`${format(result.firstDirectionDegrees)}°`],['Line 2 direction',`${format(result.secondDirectionDegrees)}°`],['Length 1–2',format(result.firstLength)],['Length 3–4',format(result.secondLength)]],warnings:['Lengths use the same coordinate unit entered above.']};
+    },
+  },
   'gcode-preflight': {
     formula: 'Bounded XY modal preview: G0/G1 endpoints and G2/G3 G17 arcs with I/J centre offsets; G20/G21 set units and G90/G91 set absolute/incremental distance mode.',
     assumptions: ['The program explicitly sets units and distance mode before its first motion.', 'Initial preview position is X0 Y0; only the documented XY subset is interpreted.', 'Arc I/J values are incremental offsets from the arc start in the G17 XY plane.'],

@@ -31,7 +31,7 @@ export function validateCatalogue(catalogue) {
     if (tool.implementation != null && tool.implementation !== 'native') throw new Error(`Invalid implementation for ${tool.slug}`);
     if (tool.implementation === 'native') {
       if (tool.hosting !== 'wayne-hosted') throw new Error(`Native ${tool.slug} must be wayne-hosted`);
-      if (tool.sourceUrl !== 'https://github.com/Wayner84/tools') throw new Error(`Native ${tool.slug} must use the Tool Deck sourceUrl`);
+      if (!/^https:\/\/github\.com\/Wayner84\/[A-Za-z0-9._-]+\/?$/.test(tool.sourceUrl)) throw new Error(`Native ${tool.slug} must use a Wayner84 GitHub sourceUrl`);
       if (tool.destinationType !== 'worksheet') throw new Error(`Native ${tool.slug} must be a worksheet`);
     }
     if (!Array.isArray(tool.aliases) || tool.aliases.some((alias) => typeof alias !== 'string')) throw new Error(`Invalid aliases for ${tool.slug}`);
