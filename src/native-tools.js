@@ -850,6 +850,47 @@ export function calculateLineAngles(points) {
   return requireFiniteResults({smallerDegrees,supplementaryDegrees:180-smallerDegrees,directedDegrees,firstDirectionDegrees:direction(first),secondDirectionDegrees:direction(second),firstLength,secondLength},'Coordinate-line-angle result');
 }
 
+const GEOMETRY_PLOT_ASPECT = (720 - 78 - 28) / (360 - 24 - 58);
+
+function equalScaleGeometryDomains(points, paddingFraction = 0.16) {
+  const xs=points.map(({x})=>x),ys=points.map(({y})=>y);
+  const centreX=(Math.min(...xs)+Math.max(...xs))/2,centreY=(Math.min(...ys)+Math.max(...ys))/2;
+  let halfX=Math.max((Math.max(...xs)-Math.min(...xs))/2,1e-9);
+  let halfY=Math.max((Math.max(...ys)-Math.min(...ys))/2,1e-9);
+  halfX*=1+paddingFraction*2;halfY*=1+paddingFraction*2;
+  if(halfX/halfY<GEOMETRY_PLOT_ASPECT) halfX=halfY*GEOMETRY_PLOT_ASPECT;
+  else halfY=halfX/GEOMETRY_PLOT_ASPECT;
+  return {xDomain:[centreX-halfX,centreX+halfX],yDomain:[centreY-halfY,centreY+halfY]};
+}
+
+function circleGeometryChart(points, circle) {
+  const calculated=Array.from({length:73},(_,index)=>{
+    const angle=index*Math.PI*2/72;
+    return {x:circle.centre.x+circle.radius*Math.cos(angle),y:circle.centre.y+circle.radius*Math.sin(angle)};
+  });
+  const domains=equalScaleGeometryDomains(calculated);
+  return {
+    title:'Circle preview',summary:`Calculated circle through three measured XY points; centre (${format(circle.centre.x)}, ${format(circle.centre.y)}), radius ${format(circle.radius)}.`,
+    xLabel:'X coordinate',yLabel:'Y coordinate',...domains,referenceLines:[],
+    series:[
+      {label:'Calculated circle',kind:'line',className:'geometry-circle',points:calculated},
+      {label:'Measured points',kind:'points',className:'geometry-points',points:points.map((point,index)=>({...point,label:`Point ${index+1}: (${format(point.x)}, ${format(point.y)})`}))},
+    ],
+  };
+}
+
+function lineGeometryChart(points, angles) {
+  const domains=equalScaleGeometryDomains(points);
+  return {
+    title:'Line-angle preview',summary:`Two measured point-pair lines with a smaller included angle of ${format(angles.smallerDegrees)} degrees.`,
+    xLabel:'X coordinate',yLabel:'Y coordinate',...domains,referenceLines:[],
+    series:[
+      {label:'Line 1 · A→B',kind:'line-points',className:'geometry-line-one',points:points.slice(0,2).map((point,index)=>({...point,label:`${index===0?'A':'B'}: (${format(point.x)}, ${format(point.y)})`}))},
+      {label:'Line 2 · C→D',kind:'line-points',className:'geometry-line-two',points:points.slice(2,4).map((point,index)=>({...point,label:`${index===0?'C':'D'}: (${format(point.x)}, ${format(point.y)})`}))},
+    ],
+  };
+}
+
 export function calculateBoltCircle({ diameter, holes, startAngle, originX, originY, direction }) {
   requireFinite([diameter, holes, startAngle, originX, originY]);
   if (diameter <= 0) throw new RangeError('Diameter must be greater than zero');
@@ -967,11 +1008,11 @@ export const NATIVE_TOOL_DEFINITIONS = {
       const points=[1,2,3,4].map((index)=>({x:numeric[`x${index}`],y:numeric[`y${index}`]}));
       if(values.mode==='circle'){
         const result=calculateCircleGeometry(points.slice(0,3));
-        return {lines:[['Centre X',format(result.centre.x)],['Centre Y',format(result.centre.y)],['Radius R',format(result.radius)],['Diameter Ø',format(result.diameter)]],warnings:['Results use the same coordinate unit entered above.']};
+        return {lines:[['Centre X',format(result.centre.x)],['Centre Y',format(result.centre.y)],['Radius R',format(result.radius)],['Diameter Ø',format(result.diameter)]],charts:[circleGeometryChart(points.slice(0,3),result)],warnings:['Results use the same coordinate unit entered above.']};
       }
       if(values.mode!=='lines') throw new RangeError('Choose circle or lines mode');
       const result=calculateLineAngles(points);
-      return {lines:[['Smaller angle between lines',`${format(result.smallerDegrees)}°`],['Other angle',`${format(result.supplementaryDegrees)}°`],['Directed 1→2 to 3→4 angle',`${format(result.directedDegrees)}°`],['Line 1 direction',`${format(result.firstDirectionDegrees)}°`],['Line 2 direction',`${format(result.secondDirectionDegrees)}°`],['Length 1–2',format(result.firstLength)],['Length 3–4',format(result.secondLength)]],warnings:['Lengths use the same coordinate unit entered above.']};
+      return {lines:[['Smaller angle between lines',`${format(result.smallerDegrees)}°`],['Other angle',`${format(result.supplementaryDegrees)}°`],['Directed 1→2 to 3→4 angle',`${format(result.directedDegrees)}°`],['Line 1 direction',`${format(result.firstDirectionDegrees)}°`],['Line 2 direction',`${format(result.secondDirectionDegrees)}°`],['Length 1–2',format(result.firstLength)],['Length 3–4',format(result.secondLength)]],charts:[lineGeometryChart(points,result)],warnings:['Lengths use the same coordinate unit entered above.']};
     },
   },
   'gcode-preflight': {
@@ -1515,9 +1556,23 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
   if (!form) return;
   const definition=NATIVE_TOOL_DEFINITIONS[form.dataset.tool];
   if(!definition){ form.replaceChildren(); addTextElement(documentRef,form,'p','This worksheet definition is unavailable.','error'); return; }
+  const isCoordinateGeometry=form.dataset.tool==='coordinate-geometry';
   const intro=documentRef.createElement('section');intro.className='panel';addTextElement(documentRef,intro,'h2','Method');addTextElement(documentRef,intro,'p',definition.formula,'formula');addTextElement(documentRef,intro,'h3','Assumptions');const assumptions=documentRef.createElement('ul');for(const item of definition.assumptions)addTextElement(documentRef,assumptions,'li',item);intro.append(assumptions);if(definition.limitations){addTextElement(documentRef,intro,'h3','Limitations');const limitations=documentRef.createElement('ul');for(const item of definition.limitations)addTextElement(documentRef,limitations,'li',item);intro.append(limitations);}form.append(intro);
-  const panel=documentRef.createElement('section');panel.className='panel';addTextElement(documentRef,panel,'h2','Inputs');const fields=documentRef.createElement('div');fields.className='fields';
+
+  const panel=documentRef.createElement('section');panel.className=isCoordinateGeometry?'panel coordinate-input-panel':'panel';addTextElement(documentRef,panel,'h2',isCoordinateGeometry?'Coordinates':'Inputs');
+  let modeControl=null;const coordinateTabs=[];
+  if(isCoordinateGeometry){
+    const tabs=documentRef.createElement('div');tabs.className='coordinate-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Coordinate calculation');
+    for(const [mode,labelText] of [['circle','Three-point circle'],['lines','Line angle']]){
+      const tab=documentRef.createElement('button');tab.type='button';tab.textContent=labelText;tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(mode==='circle'));tab.dataset.mode=mode;tabs.append(tab);coordinateTabs.push(tab);
+    }
+    panel.append(tabs);
+    modeControl=documentRef.createElement('input');modeControl.type='hidden';modeControl.name='mode';modeControl.value='circle';panel.append(modeControl);
+  }
+
+  const fields=documentRef.createElement('div');fields.className='fields';
   for(const [name,labelText,value,kind] of definition.fields){
+    if(isCoordinateGeometry&&name==='mode') continue;
     const label=documentRef.createElement('label');addTextElement(documentRef,label,'span',labelText);let control;
     if(Array.isArray(kind)){
       control=documentRef.createElement('select');
@@ -1534,10 +1589,17 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
     }else{
       control=documentRef.createElement('input');control.type='number';control.step=kind;control.required=true;control.value=String(value);
     }
-    control.name=name;label.append(control);fields.append(label);
+    control.name=name;
+    if(isCoordinateGeometry&&(name==='x4'||name==='y4')){label.className='geometry-line-only';label.hidden=true;}
+    label.append(control);fields.append(label);
   }
-  panel.append(fields);const button=documentRef.createElement('button');button.type='submit';button.textContent='Calculate';panel.append(button);if(definition.clearFields){const clear=documentRef.createElement('button');clear.type='button';clear.textContent='Clear local input';clear.addEventListener('click',()=>{for(const name of definition.clearFields){const control=form.elements.namedItem(name);if(control)control.value='';}output.replaceChildren();addTextElement(documentRef,output,'h2','Local input cleared');addTextElement(documentRef,output,'p','The entered text and rendered results have been removed from this browser tab.');});panel.append(clear);}form.append(panel);
-  const output=documentRef.createElement('section');output.className='panel result';output.tabIndex=0;output.setAttribute('role','status');output.setAttribute('aria-live','polite');form.append(output);addTextElement(documentRef,form,'p','Planning and educational aid only. Independently verify inputs, assumptions, units and results before engineering, inspection or production use.','warning');
+  panel.append(fields);
+  const button=documentRef.createElement('button');button.type='submit';button.textContent=isCoordinateGeometry?'Calculate circle':'Calculate';panel.append(button);
+  const output=documentRef.createElement('section');output.className='panel result';output.tabIndex=0;output.setAttribute('role','status');output.setAttribute('aria-live','polite');
+  if(definition.clearFields){const clear=documentRef.createElement('button');clear.type='button';clear.textContent='Clear local input';clear.addEventListener('click',()=>{for(const name of definition.clearFields){const control=form.elements.namedItem(name);if(control)control.value='';}output.replaceChildren();addTextElement(documentRef,output,'h2','Local input cleared');addTextElement(documentRef,output,'p','The entered text and rendered results have been removed from this browser tab.');});panel.append(clear);}
+  if(isCoordinateGeometry){const workspace=documentRef.createElement('div');workspace.className='coordinate-workspace';workspace.append(panel,output);form.append(workspace);}else{form.append(panel,output);}
+  addTextElement(documentRef,form,'p','Planning and educational aid only. Independently verify inputs, assumptions, units and results before engineering, inspection or production use.','warning');
+
   const calculate=async()=>{
     button.disabled=true;
     try{
@@ -1553,5 +1615,15 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
       output.replaceChildren();addTextElement(documentRef,output,'h2','Check the inputs');addTextElement(documentRef,output,'p',error instanceof Error?error.message:'Unable to calculate.','error');
     }finally{button.disabled=false;}
   };
-  form.addEventListener('submit',(event)=>{event.preventDefault();void calculate();});void calculate();
+  const setCoordinateMode=(mode,recalculate)=>{
+    if(!isCoordinateGeometry) return;
+    modeControl.value=mode;
+    for(const tab of coordinateTabs) tab.setAttribute('aria-selected',String(tab.dataset.mode===mode));
+    for(const label of fields.querySelectorAll('.geometry-line-only')) label.hidden=mode==='circle';
+    button.textContent=mode==='circle'?'Calculate circle':'Calculate angle';
+    if(recalculate) void calculate();
+  };
+  for(const tab of coordinateTabs) tab.addEventListener('click',()=>setCoordinateMode(tab.dataset.mode,true));
+  form.addEventListener('submit',(event)=>{event.preventDefault();void calculate();});
+  setCoordinateMode('circle',false);void calculate();
 }
