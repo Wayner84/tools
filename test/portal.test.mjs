@@ -38,6 +38,19 @@ test('drawio points to Wayne deployment', () => {
   assert.equal(tools.find((tool) => tool.slug === 'drawio').launchUrl, 'https://wayner84.github.io/drawio/src/main/webapp/');
 });
 
+test('PC-DMIS report comparer is a separate Wayne-hosted browser application', () => {
+  const comparer = tools.find((tool) => tool.slug === 'pc-dmis-report-comparer');
+  assert.ok(comparer);
+  assert.equal(comparer.name, 'PC-DMIS Report Comparer');
+  assert.equal(comparer.launchUrl, 'https://wayner84.github.io/pc-dmis-report-comparer/');
+  assert.equal(comparer.sourceRepo, 'Wayner84/pc-dmis-report-comparer');
+  assert.equal(comparer.sourceUrl, 'https://github.com/Wayner84/pc-dmis-report-comparer');
+  assert.equal(comparer.hosting, 'wayne-hosted');
+  assert.equal(comparer.destinationType, 'application');
+  assert.match(comparer.dataBoundary, /locally|browser/i);
+  assert.match(comparer.dataBoundary, /not uploaded/i);
+});
+
 test('build emits every stable route', async () => {
   execFileSync(process.execPath, ['scripts/build.mjs']);
   for (const tool of tools) await access(`dist/${tool.slug}/index.html`);

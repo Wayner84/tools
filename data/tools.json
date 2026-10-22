@@ -1209,5 +1209,30 @@
     "dataBoundary": "Runs locally in this browser tab; entered beam properties stay in memory and are not uploaded or retained.",
     "implementation": "native",
     "launchUrl": "https://wayner84.github.io/tools/beam-deflection/"
+  },
+  {
+    "slug": "pc-dmis-report-comparer",
+    "name": "PC-DMIS Report Comparer",
+    "description": "Compare up to 10 PC-DMIS PDF inspection reports with local browser OCR, specification status and CSV export.",
+    "category": "Engineering",
+    "launchUrl": "https://wayner84.github.io/pc-dmis-report-comparer/",
+    "sourceRepo": "Wayner84/pc-dmis-report-comparer",
+    "sourceUrl": "https://github.com/Wayner84/pc-dmis-report-comparer",
+    "license": "MIT",
+    "hosting": "wayne-hosted",
+    "tracked": null,
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "Wayne",
+    "aliases": [
+      "PC-DMIS",
+      "CMM report",
+      "inspection report comparison",
+      "metrology OCR",
+      "lot spread",
+      "PDF comparator"
+    ],
+    "functionalCheck": "2026-10-22: browser parser, comparison, export and generated launch-route behaviour covered by automated tests; live PDF OCR is separately verified.",
+    "dataBoundary": "Wayne-hosted static application; selected PDF reports are processed locally in the browser and are not uploaded or retained."
   }
 ]
