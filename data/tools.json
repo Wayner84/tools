@@ -1220,7 +1220,11 @@
     "sourceUrl": "https://github.com/Wayner84/pc-dmis-report-comparer",
     "license": "MIT",
     "hosting": "wayne-hosted",
-    "tracked": null,
+    "tracked": {
+      "kind": "commit",
+      "value": "4b61d4a476df18a6d8e0010f68c312c36750660a",
+      "publishedAt": "2026-10-23T01:47:22Z"
+    },
     "defaultBranch": "main",
     "destinationType": "application",
     "operator": "Wayne",
