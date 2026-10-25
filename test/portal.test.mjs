@@ -51,6 +51,18 @@ test('PC-DMIS report comparer is a separate Wayne-hosted browser application', (
   assert.match(comparer.dataBoundary, /not uploaded/i);
 });
 
+test('Minecraft Solid Builder is a Wayne-hosted Gaming application', () => {
+  const builder = tools.find((tool) => tool.slug === 'minecraft-solid-builder');
+  assert.ok(builder);
+  assert.equal(builder.category, 'Gaming');
+  assert.equal(builder.launchUrl, 'https://wayner84.github.io/minecraft-solid-builder/');
+  assert.equal(builder.sourceRepo, 'Wayner84/minecraft-solid-builder');
+  assert.equal(builder.hosting, 'wayne-hosted');
+  assert.equal(builder.destinationType, 'application');
+  assert.match(builder.dataBoundary, /locally|browser/i);
+  assert.match(builder.dataBoundary, /no uploads/i);
+});
+
 test('build emits every stable route', async () => {
   execFileSync(process.execPath, ['scripts/build.mjs']);
   for (const tool of tools) await access(`dist/${tool.slug}/index.html`);

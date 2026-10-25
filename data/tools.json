@@ -1238,5 +1238,33 @@
     ],
     "functionalCheck": "2026-10-22: browser parser, comparison, export and generated launch-route behaviour covered by automated tests; live PDF OCR is separately verified.",
     "dataBoundary": "Wayne-hosted static application; selected PDF reports are processed locally in the browser and are not uploaded or retained."
+  },
+  {
+    "slug": "minecraft-solid-builder",
+    "name": "Minecraft Solid Builder",
+    "description": "Generate all five Platonic solids as Minecraft block builds with a 3D preview and layer-by-layer blueprints.",
+    "category": "Gaming",
+    "launchUrl": "https://wayner84.github.io/minecraft-solid-builder/",
+    "sourceRepo": "Wayner84/minecraft-solid-builder",
+    "sourceUrl": "https://github.com/Wayner84/minecraft-solid-builder",
+    "license": "MIT",
+    "hosting": "wayne-hosted",
+    "tracked": null,
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "Wayne",
+    "aliases": [
+      "Minecraft",
+      "block builder",
+      "voxel",
+      "Platonic solids",
+      "tetrahedron",
+      "octahedron",
+      "dodecahedron",
+      "icosahedron",
+      "layer guide"
+    ],
+    "functionalCheck": "2026-10-25: all five solids, shell thickness, orientations, 3D preview, layer navigation, build-guide exports and responsive layout were tested before deployment.",
+    "dataBoundary": "Wayne-hosted static application; generation and rendering run locally in the browser with no uploads, accounts or analytics."
   }
 ]

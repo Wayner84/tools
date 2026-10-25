@@ -160,7 +160,7 @@ const batch2Slugs = ['machining-feeds-speeds','gauge-block-stack','tolerance-cha
 
 test('batch 2 adds exactly seven Wayne-hosted native catalogue records', async () => {
   const catalogue = JSON.parse(await readFile('data/tools.json', 'utf8'));
-  assert.equal(catalogue.length, 52);
+  assert.equal(catalogue.length, 53);
   const records = catalogue.filter((tool) => batch2Slugs.includes(tool.slug));
   assert.equal(records.length, 7);
   for (const record of records) {
