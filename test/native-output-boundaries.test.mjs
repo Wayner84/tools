@@ -188,6 +188,7 @@ test('acceptance sampling preserves representable producer risk instead of cance
 const calculatorCases = {
   calculateAcceptanceSamplingOc: () => nativeTools.calculateAcceptanceSamplingOc({ sampleSize: 10, acceptanceNumber: 1, defectProbability: 0.05, aql: 0.01, lq: 0.1, curveProbabilities: [0, 0.05, 0.1, 1] }),
   calculateBeamDeflection: () => nativeTools.calculateBeamDeflection({ loadN: 1000, lengthM: 1, elasticModulusPa: 200e9, secondMomentM4: 1e-8 }),
+  calculateBestFitLineAngle: () => nativeTools.calculateBestFitLineAngle([{ x: 0, y: 0 }, { x: 5, y: 0.1 }, { x: 10, y: 0 }], [{ x: 0, y: 0 }, { x: 5, y: 5.1 }, { x: 10, y: 10 }]),
   calculateBoltCircle: () => nativeTools.calculateBoltCircle({ diameter: 100, holes: 6, startAngle: 0, originX: 0, originY: 0, direction: 'ccw' }),
   calculateCircleGeometry: () => nativeTools.calculateCircleGeometry([{ x: 0, y: 0 }, { x: 10, y: 0 }, { x: 5, y: 5 }]),
   calculateGaugeRrAnova: () => nativeTools.calculateGaugeRrAnova(balancedGaugeData),
@@ -203,6 +204,8 @@ const calculatorCases = {
   calculateToleranceChain: () => nativeTools.calculateToleranceChain([{ nominal: 10, plus: 0.1, minus: -0.1, sign: 1 }, { nominal: 4, plus: 0.05, minus: -0.05, sign: -1 }]),
   calculateUncertaintyBudget: () => nativeTools.calculateUncertaintyBudget({ components: [{ magnitude: 0.01, distribution: 'standard', sensitivity: 1 }], coverageFactor: 2 }),
   evaluateGuardBandDecision: () => nativeTools.evaluateGuardBandDecision({ lsl: 9.5, usl: 10.5, measured: 10.42, guard: 0.1, rule: 'guarded-acceptance' }),
+  fitCircleGeometry: () => nativeTools.fitCircleGeometry([{ x: 10, y: 0 }, { x: 0, y: 10 }, { x: -10, y: 0 }, { x: 0, y: -10 }]),
+  fitLineGeometry: () => nativeTools.fitLineGeometry([{ x: 0, y: 0 }, { x: 5, y: 5.1 }, { x: 10, y: 10 }]),
   fitLinearCalibration: () => nativeTools.fitLinearCalibration({ reference: [0, 1, 2], response: [1, 3, 5], predictAt: 1.5 }),
   generateInspectionReportFromCsv: () => nativeTools.generateInspectionReportFromCsv({ csv: 'feature,nominal,measured,lower,upper\nA,10,10.1,-0.2,0.2', mapping: { id: 'feature', nominal: 'nominal', measured: 'measured', lowerTolerance: 'lower', upperTolerance: 'upper' }, unit: 'mm' }),
   inspectStepPart21: () => nativeTools.inspectStepPart21("ISO-10303-21;\nHEADER;\nFILE_DESCRIPTION(('demo'),'2;1');\nFILE_NAME('demo.step','2026-09-10T00:00:00',('Author'),('Org'),'','','');\nFILE_SCHEMA(('AP242'));\nENDSEC;\nDATA;\n#1=CARTESIAN_POINT('',(0.,0.,0.));\nENDSEC;\nEND-ISO-10303-21;"),

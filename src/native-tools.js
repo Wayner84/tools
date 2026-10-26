@@ -816,8 +816,8 @@ export function generateInspectionReportFromCsv({ csv, mapping, unit }) {
   return { rows, csv: [headings.join(','), ...outputRows].join('\n') + '\n', rawInput: csv, unit, decisionRule: 'Plain inclusive comparison to nominal plus stated lower/upper tolerances; measurement uncertainty is not included.' };
 }
 
-function requireGeometryPoints(points, count) {
-  if (!Array.isArray(points) || points.length !== count) throw new RangeError(`Exactly ${count} points are required`);
+function requireGeometryPoints(points, minimum, maximum = minimum) {
+  if (!Array.isArray(points) || points.length < minimum || points.length > maximum) throw new RangeError(`Between ${minimum} and ${maximum} points are required`);
   const coordinates = points.flatMap((point) => [point?.x, point?.y]);
   requireFinite(coordinates);
 }
@@ -850,6 +850,45 @@ export function calculateLineAngles(points) {
   return requireFiniteResults({smallerDegrees,supplementaryDegrees:180-smallerDegrees,directedDegrees,firstDirectionDegrees:direction(first),secondDirectionDegrees:direction(second),firstLength,secondLength},'Coordinate-line-angle result');
 }
 
+export function fitCircleGeometry(points) {
+  requireGeometryPoints(points, 3, 50);
+  const origin = points.reduce((sum, point) => ({ x: sum.x + point.x / points.length, y: sum.y + point.y / points.length }), { x: 0, y: 0 });
+  let suu=0,suv=0,svv=0,suw=0,svw=0;
+  for(const point of points){
+    const u=point.x-origin.x,v=point.y-origin.y,w=u*u+v*v;
+    suu+=u*u;suv+=u*v;svv+=v*v;suw+=u*w;svw+=v*w;
+  }
+  const determinant=suu*svv-suv*suv;
+  const scale=Math.max(1,...points.flatMap((point)=>[Math.abs(point.x),Math.abs(point.y)]));
+  if(Math.abs(determinant)<=1e-14*scale**4) throw new RangeError('The points are collinear or too close to a straight line');
+  const alpha=(suw*svv-svw*suv)/determinant,beta=(svw*suu-suw*suv)/determinant;
+  const centre={x:origin.x+alpha/2,y:origin.y+beta/2};
+  const radii=points.map((point)=>Math.hypot(point.x-centre.x,point.y-centre.y));
+  const averageRadius=radii.reduce((sum,radius)=>sum+radius,0)/radii.length;
+  const minRadius=Math.min(...radii),maxRadius=Math.max(...radii);
+  return requireFiniteResults({centre,radii,averageRadius,averageDiameter:averageRadius*2,minRadius,maxRadius,minDiameter:minRadius*2,maxDiameter:maxRadius*2},'Best-fit coordinate-circle result');
+}
+
+export function fitLineGeometry(points) {
+  requireGeometryPoints(points, 2, 50);
+  const centre=points.reduce((sum,point)=>({x:sum.x+point.x/points.length,y:sum.y+point.y/points.length}),{x:0,y:0});
+  let xx=0,xy=0,yy=0;
+  for(const point of points){const x=point.x-centre.x,y=point.y-centre.y;xx+=x*x;xy+=x*y;yy+=y*y;}
+  if(xx+yy<=1e-24) throw new RangeError('Each line needs two different points; zero length is not valid');
+  const angle=.5*Math.atan2(2*xy,xx-yy);
+  const direction={x:Math.cos(angle),y:Math.sin(angle)};
+  const directionDegrees=((angle*180/Math.PI)%180+180)%180;
+  return requireFiniteResults({centre,direction,directionDegrees,length:Math.sqrt(xx+yy)},'Best-fit coordinate-line result');
+}
+
+export function calculateBestFitLineAngle(firstPoints, secondPoints) {
+  const lines=[fitLineGeometry(firstPoints),fitLineGeometry(secondPoints)];
+  const dot=lines[0].direction.x*lines[1].direction.x+lines[0].direction.y*lines[1].direction.y;
+  const cross=lines[0].direction.x*lines[1].direction.y-lines[0].direction.y*lines[1].direction.x;
+  const smallerDegrees=Math.atan2(Math.abs(cross),Math.abs(dot))*180/Math.PI;
+  return requireFiniteResults({lines,smallerDegrees,supplementaryDegrees:180-smallerDegrees,directedDegrees:Math.atan2(Math.abs(cross),dot)*180/Math.PI},'Best-fit coordinate-line-angle result');
+}
+
 const GEOMETRY_PLOT_ASPECT = (720 - 78 - 28) / (360 - 24 - 58);
 
 function equalScaleGeometryDomains(points, paddingFraction = 0.16) {
@@ -864,29 +903,34 @@ function equalScaleGeometryDomains(points, paddingFraction = 0.16) {
 }
 
 function circleGeometryChart(points, circle) {
-  const calculated=Array.from({length:73},(_,index)=>{
-    const angle=index*Math.PI*2/72;
-    return {x:circle.centre.x+circle.radius*Math.cos(angle),y:circle.centre.y+circle.radius*Math.sin(angle)};
-  });
-  const domains=equalScaleGeometryDomains(calculated);
+  const ring=(radius)=>Array.from({length:73},(_,index)=>{const angle=index*Math.PI*2/72;return {x:circle.centre.x+radius*Math.cos(angle),y:circle.centre.y+radius*Math.sin(angle)};});
+  const average=ring(circle.averageRadius),inscribed=ring(circle.minRadius),circumscribed=ring(circle.maxRadius);
+  const domains=equalScaleGeometryDomains(circumscribed);
   return {
-    title:'Circle preview',summary:`Calculated circle through three measured XY points; centre (${format(circle.centre.x)}, ${format(circle.centre.y)}), radius ${format(circle.radius)}.`,
+    title:'Circle preview',summary:`Best-fit circle and shared-centre radial envelopes through ${points.length} measured XY points; centre (${format(circle.centre.x)}, ${format(circle.centre.y)}).`,
     xLabel:'X coordinate',yLabel:'Y coordinate',...domains,referenceLines:[],
     series:[
-      {label:'Calculated circle',kind:'line',className:'geometry-circle',points:calculated},
+      {label:'Average / best-fit circle',kind:'line',className:'geometry-circle',points:average},
+      {label:'Maximum inscribed circle',kind:'line',className:'geometry-inscribed',points:inscribed},
+      {label:'Minimum circumscribed circle',kind:'line',className:'geometry-circumscribed',points:circumscribed},
       {label:'Measured points',kind:'points',className:'geometry-points',points:points.map((point,index)=>({...point,label:`Point ${index+1}: (${format(point.x)}, ${format(point.y)})`}))},
     ],
   };
 }
 
-function lineGeometryChart(points, angles) {
+function lineGeometryChart(firstPoints, secondPoints, angles) {
+  const points=[...firstPoints,...secondPoints];
   const domains=equalScaleGeometryDomains(points);
+  const span=Math.max(domains.xDomain[1]-domains.xDomain[0],domains.yDomain[1]-domains.yDomain[0]);
+  const fitted=(line)=>[-1,1].map((sign)=>({x:line.centre.x+sign*line.direction.x*span,y:line.centre.y+sign*line.direction.y*span}));
   return {
-    title:'Line-angle preview',summary:`Two measured point-pair lines with a smaller included angle of ${format(angles.smallerDegrees)} degrees.`,
+    title:'Line-angle preview',summary:`Two orthogonal best-fit lines through ${firstPoints.length} and ${secondPoints.length} measured points with a smaller included angle of ${format(angles.smallerDegrees)} degrees.`,
     xLabel:'X coordinate',yLabel:'Y coordinate',...domains,referenceLines:[],
     series:[
-      {label:'Line 1 · A→B',kind:'line-points',className:'geometry-line-one',points:points.slice(0,2).map((point,index)=>({...point,label:`${index===0?'A':'B'}: (${format(point.x)}, ${format(point.y)})`}))},
-      {label:'Line 2 · C→D',kind:'line-points',className:'geometry-line-two',points:points.slice(2,4).map((point,index)=>({...point,label:`${index===0?'C':'D'}: (${format(point.x)}, ${format(point.y)})`}))},
+      {label:'Line 1 best fit',kind:'line',className:'geometry-line-one',points:fitted(angles.lines[0])},
+      {label:'Line 2 best fit',kind:'line',className:'geometry-line-two',points:fitted(angles.lines[1])},
+      {label:'Line 1 measured points',kind:'points',className:'geometry-line-one-points',points:firstPoints.map((point,index)=>({...point,label:`Line 1 point ${index+1}: (${format(point.x)}, ${format(point.y)})`}))},
+      {label:'Line 2 measured points',kind:'points',className:'geometry-line-two-points',points:secondPoints.map((point,index)=>({...point,label:`Line 2 point ${index+1}: (${format(point.x)}, ${format(point.y)})`}))},
     ],
   };
 }
@@ -991,28 +1035,37 @@ export function calculateSineBar({ centreDistance, angleDegrees, stackHeight, ce
   }, 'Sine-bar result');
 }
 
+function readGeometryPointSet(values, prefix, countName, minimum) {
+  const count=Number(values[countName]);
+  if(!Number.isInteger(count)||count<minimum||count>50) throw new RangeError(`${countName} must be a whole number from ${minimum} to 50`);
+  return Array.from({length:count},(_,index)=>{
+    const number=index+1,xText=String(values[`${prefix}X${number}`]??'').trim(),yText=String(values[`${prefix}Y${number}`]??'').trim();
+    if(!xText||!yText) throw new RangeError(`Enter X and Y for point ${number}`);
+    const point={x:Number(xText),y:Number(yText)};
+    requireFinite([point.x,point.y]);
+    return point;
+  });
+}
+
 export const NATIVE_TOOL_DEFINITIONS = {
   'coordinate-geometry': {
-    formula: 'Circle: solve the circumcentre through points 1–3. Lines: vectors 1→2 and 3→4; smaller angle = atan2(|cross|, |dot|).',
-    assumptions: ['All coordinates are Cartesian XY values in one common unit and plane.', 'Circle mode uses points 1–3 and ignores point 4.', 'Line mode treats point pairs 1–2 and 3–4 as infinite lines; directions are anticlockwise from +X and normalised to 0°–180°.'],
-    limitations: ['Collinear three-point circles and zero-length lines are rejected.', 'No uncertainty, best-fit circle/line, 3D projection, datum alignment or coordinate-system transformation is included.', 'The worksheet displays up to six decimal places; use the full-precision source calculations when chaining results.'],
+    formula: 'Circle: algebraic least-squares centre with average radius and shared-centre radial envelopes. Lines: orthogonal total-least-squares fits; smaller angle = atan2(|cross|, |dot|).',
+    assumptions: ['All coordinates are Cartesian XY values in one common unit and plane.', 'Circle mode accepts 3–50 measured points.', 'Line mode accepts 2–50 measured points for each independent line; directions are anticlockwise from +X and normalised to 0°–180°.'],
+    limitations: ['Collinear circle points and zero-spread line point sets are rejected.', 'Maximum-inscribed and minimum-circumscribed values are shared-centre radial envelopes, not standards-certified optimised Chebyshev fits.', 'No uncertainty, 3D projection, datum alignment or coordinate-system transformation is included.'],
     fields: [
-      ['mode','Calculation','circle',[['circle','Circle through points 1–3'],['lines','Angle between lines 1–2 and 3–4']]],
-      ['x1','Point 1 / A — X',0,'any'],['y1','Point 1 / A — Y',0,'any'],
-      ['x2','Point 2 / B — X',10,'any'],['y2','Point 2 / B — Y',0,'any'],
-      ['x3','Point 3 / C — X',5,'any'],['y3','Point 3 / C — Y',5,'any'],
-      ['x4','Point 4 / D — X',10,'any'],['y4','Point 4 / D — Y',10,'any'],
+      ['mode','Calculation','circle'],['circleCount','Circle points',6],
+      ['circleX1','Circle point 1 X',10],['circleY1','Circle point 1 Y',0],['circleX2','Circle point 2 X',5],['circleY2','Circle point 2 Y',8.66],['circleX3','Circle point 3 X',-5],['circleY3','Circle point 3 Y',8.66],['circleX4','Circle point 4 X',-10],['circleY4','Circle point 4 Y',0],['circleX5','Circle point 5 X',-5],['circleY5','Circle point 5 Y',-8.66],['circleX6','Circle point 6 X',5],['circleY6','Circle point 6 Y',-8.66],
+      ['line1Count','Line 1 points',3],['line1X1','Line 1 point 1 X',0],['line1Y1','Line 1 point 1 Y',0],['line1X2','Line 1 point 2 X',5],['line1Y2','Line 1 point 2 Y',.1],['line1X3','Line 1 point 3 X',10],['line1Y3','Line 1 point 3 Y',0],
+      ['line2Count','Line 2 points',3],['line2X1','Line 2 point 1 X',0],['line2Y1','Line 2 point 1 Y',0],['line2X2','Line 2 point 2 X',5],['line2Y2','Line 2 point 2 Y',5.1],['line2X3','Line 2 point 3 X',10],['line2Y3','Line 2 point 3 Y',10],
     ],
     run(values) {
-      const numeric=numberValues(values,['x1','y1','x2','y2','x3','y3','x4','y4']);
-      const points=[1,2,3,4].map((index)=>({x:numeric[`x${index}`],y:numeric[`y${index}`]}));
       if(values.mode==='circle'){
-        const result=calculateCircleGeometry(points.slice(0,3));
-        return {lines:[['Centre X',format(result.centre.x)],['Centre Y',format(result.centre.y)],['Radius R',format(result.radius)],['Diameter Ø',format(result.diameter)]],charts:[circleGeometryChart(points.slice(0,3),result)],warnings:['Results use the same coordinate unit entered above.']};
+        const points=readGeometryPointSet(values,'circle','circleCount',3),result=fitCircleGeometry(points);
+        return {lines:[['Best-fit centre X',format(result.centre.x)],['Best-fit centre Y',format(result.centre.y)],['Average / best-fit Ø',format(result.averageDiameter)],['Maximum inscribed Ø',format(result.minDiameter)],['Minimum circumscribed Ø',format(result.maxDiameter)],['Radial range',format(result.maxRadius-result.minRadius)]],charts:[circleGeometryChart(points,result)],warnings:['Envelope diameters share the best-fit centre and use the same coordinate unit entered above.']};
       }
       if(values.mode!=='lines') throw new RangeError('Choose circle or lines mode');
-      const result=calculateLineAngles(points);
-      return {lines:[['Smaller angle between lines',`${format(result.smallerDegrees)}°`],['Other angle',`${format(result.supplementaryDegrees)}°`],['Directed 1→2 to 3→4 angle',`${format(result.directedDegrees)}°`],['Line 1 direction',`${format(result.firstDirectionDegrees)}°`],['Line 2 direction',`${format(result.secondDirectionDegrees)}°`],['Length 1–2',format(result.firstLength)],['Length 3–4',format(result.secondLength)]],charts:[lineGeometryChart(points,result)],warnings:['Lengths use the same coordinate unit entered above.']};
+      const firstPoints=readGeometryPointSet(values,'line1','line1Count',2),secondPoints=readGeometryPointSet(values,'line2','line2Count',2),result=calculateBestFitLineAngle(firstPoints,secondPoints);
+      return {lines:[['Smaller angle',`${format(result.smallerDegrees)}°`],['Other angle',`${format(result.supplementaryDegrees)}°`],['Directed line angle',`${format(result.directedDegrees)}°`],['Line 1 direction',`${format(result.lines[0].directionDegrees)}°`],['Line 2 direction',`${format(result.lines[1].directionDegrees)}°`]],charts:[lineGeometryChart(firstPoints,secondPoints,result)],warnings:['Each line uses an orthogonal total-least-squares fit.']};
     },
   },
   'gcode-preflight': {
@@ -1560,10 +1613,10 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
   const intro=documentRef.createElement('section');intro.className='panel';addTextElement(documentRef,intro,'h2','Method');addTextElement(documentRef,intro,'p',definition.formula,'formula');addTextElement(documentRef,intro,'h3','Assumptions');const assumptions=documentRef.createElement('ul');for(const item of definition.assumptions)addTextElement(documentRef,assumptions,'li',item);intro.append(assumptions);if(definition.limitations){addTextElement(documentRef,intro,'h3','Limitations');const limitations=documentRef.createElement('ul');for(const item of definition.limitations)addTextElement(documentRef,limitations,'li',item);intro.append(limitations);}form.append(intro);
 
   const panel=documentRef.createElement('section');panel.className=isCoordinateGeometry?'panel coordinate-input-panel':'panel';addTextElement(documentRef,panel,'h2',isCoordinateGeometry?'Coordinates':'Inputs');
-  let modeControl=null;const coordinateTabs=[];
+  let modeControl=null;const coordinateTabs=[];let geometryCircleFields=null,geometryLineFields=null;
   if(isCoordinateGeometry){
     const tabs=documentRef.createElement('div');tabs.className='coordinate-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Coordinate calculation');
-    for(const [mode,labelText] of [['circle','Three-point circle'],['lines','Line angle']]){
+    for(const [mode,labelText] of [['circle','Circle mode'],['lines','Line mode']]){
       const tab=documentRef.createElement('button');tab.type='button';tab.textContent=labelText;tab.setAttribute('role','tab');tab.setAttribute('aria-selected',String(mode==='circle'));tab.dataset.mode=mode;tabs.append(tab);coordinateTabs.push(tab);
     }
     panel.append(tabs);
@@ -1571,8 +1624,33 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
   }
 
   const fields=documentRef.createElement('div');fields.className='fields';
+  if(isCoordinateGeometry){
+    const defaults={circle:[{x:10,y:0},{x:5,y:8.66},{x:-5,y:8.66},{x:-10,y:0},{x:-5,y:-8.66},{x:5,y:-8.66}],line1:[{x:0,y:0},{x:5,y:.1},{x:10,y:0}],line2:[{x:0,y:0},{x:5,y:5.1},{x:10,y:10}]};
+    const makePointRows=(container,prefix,count,initial)=>{
+      const previous=Array.from(container.querySelectorAll('.geometry-point-row')).map((row)=>{const inputs=row.querySelectorAll('input');return {x:inputs[0].value,y:inputs[1].value};});
+      container.replaceChildren();
+      for(let index=0;index<count;index+=1){
+        const point=previous[index]??initial[index]??{x:'',y:''},row=documentRef.createElement('div');row.className='geometry-point-row';
+        addTextElement(documentRef,row,'b',String(index+1));
+        for(const [axis,value] of [['X',point.x],['Y',point.y]]){const label=documentRef.createElement('label');addTextElement(documentRef,label,'span',axis);const input=documentRef.createElement('input');input.type='number';input.step='any';input.required=true;input.name=`${prefix}${axis}${index+1}`;input.value=String(value);label.append(input);row.append(label);}
+        container.append(row);
+      }
+    };
+    const pointSet=(title,prefix,countName,minimum,initial)=>{
+      const section=documentRef.createElement('section');section.className='geometry-point-set';
+      const heading=documentRef.createElement('div');heading.className='geometry-set-heading';addTextElement(documentRef,heading,'h3',title);
+      const countLabel=documentRef.createElement('label');addTextElement(documentRef,countLabel,'span','Points');const count=documentRef.createElement('input');count.type='number';count.min=String(minimum);count.max='50';count.step='1';count.required=true;count.name=countName;count.value=String(initial.length);countLabel.append(count);heading.append(countLabel);section.append(heading);
+      const rows=documentRef.createElement('div');rows.className='geometry-point-list';section.append(rows);
+      const rebuild=()=>{const bounded=Math.min(50,Math.max(minimum,Math.round(Number(count.value)||minimum)));count.value=String(bounded);makePointRows(rows,prefix,bounded,initial);};
+      count.addEventListener('change',rebuild);rebuild();
+      return section;
+    };
+    geometryCircleFields=pointSet('Measured circle points','circle','circleCount',3,defaults.circle);geometryCircleFields.classList.add('geometry-circle-fields');
+    geometryLineFields=documentRef.createElement('div');geometryLineFields.className='geometry-line-fields';geometryLineFields.append(pointSet('Line 1 measured points','line1','line1Count',2,defaults.line1),pointSet('Line 2 measured points','line2','line2Count',2,defaults.line2));geometryLineFields.hidden=true;
+    fields.append(geometryCircleFields,geometryLineFields);
+  }
   for(const [name,labelText,value,kind] of definition.fields){
-    if(isCoordinateGeometry&&name==='mode') continue;
+    if(isCoordinateGeometry) continue;
     const label=documentRef.createElement('label');addTextElement(documentRef,label,'span',labelText);let control;
     if(Array.isArray(kind)){
       control=documentRef.createElement('select');
@@ -1619,8 +1697,9 @@ export function initialiseNativeTool(documentRef = globalThis.document) {
     if(!isCoordinateGeometry) return;
     modeControl.value=mode;
     for(const tab of coordinateTabs) tab.setAttribute('aria-selected',String(tab.dataset.mode===mode));
-    for(const label of fields.querySelectorAll('.geometry-line-only')) label.hidden=mode==='circle';
-    button.textContent=mode==='circle'?'Calculate circle':'Calculate angle';
+    if(geometryCircleFields) geometryCircleFields.hidden=mode!=='circle';
+    if(geometryLineFields) geometryLineFields.hidden=mode==='circle';
+    button.textContent=mode==='circle'?'Calculate circles':'Fit lines and calculate angle';
     if(recalculate) void calculate();
   };
   for(const tab of coordinateTabs) tab.addEventListener('click',()=>setCoordinateMode(tab.dataset.mode,true));

@@ -631,7 +631,7 @@
   {
     "slug": "coordinate-geometry",
     "name": "Coordinate geometry calculator",
-    "description": "Calculate a circle through three XY points or the angle between two lines defined by four measured points.",
+    "description": "Fit circles and line angles from configurable sets of measured XY coordinates, with shared-centre circle envelopes.",
     "category": "Engineering",
     "launchUrl": "https://wayner84.github.io/tools/coordinate-geometry/",
     "sourceUrl": "https://github.com/Wayner84/coordinate-geometry-calculator",
@@ -647,7 +647,7 @@
       "XY coordinates",
       "metrology"
     ],
-    "functionalCheck": "2026-10-21: circle, collinear, line-angle, parallel and zero-length cases are covered by automated numerical tests.",
+    "functionalCheck": "2026-10-26: multi-point circle fitting, radial envelopes, orthogonal line fitting and input bounds are covered by automated tests.",
     "dataBoundary": "Runs locally in this browser tab; entered coordinates are not uploaded, retained or sent to analytics.",
     "implementation": "native"
   },
