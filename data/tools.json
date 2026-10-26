@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "eb4141dd51247259e95ecd890c1bf3dabf314913",
-      "publishedAt": "2026-10-21T21:28:42Z"
+      "value": "b54ef0beb3b80115dc08b56da5862fdf7c74e484",
+      "publishedAt": "2026-10-26T06:58:07Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -1249,7 +1249,11 @@
     "sourceUrl": "https://github.com/Wayner84/minecraft-solid-builder",
     "license": "MIT",
     "hosting": "wayne-hosted",
-    "tracked": null,
+    "tracked": {
+      "kind": "commit",
+      "value": "679f49a812ff1f0200a34771ed2afd6c427b175c",
+      "publishedAt": "2026-10-26T01:02:16Z"
+    },
     "defaultBranch": "main",
     "destinationType": "application",
     "operator": "Wayne",
