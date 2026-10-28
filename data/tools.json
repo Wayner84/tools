@@ -401,8 +401,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "v5.5.2",
-      "publishedAt": "2026-10-02T13:35:52Z"
+      "value": "v5.5.4",
+      "publishedAt": "2026-10-28T10:37:54Z"
     },
     "defaultBranch": "main",
     "destinationType": "external service",
