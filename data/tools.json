@@ -177,8 +177,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "2026.9.0",
-      "publishedAt": "2026-09-30T11:50:32Z"
+      "value": "2026.10.0",
+      "publishedAt": "2026-10-30T09:20:14Z"
     },
     "defaultBranch": "main",
     "destinationType": "external service",
