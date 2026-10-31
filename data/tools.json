@@ -151,8 +151,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v5.34.0",
-      "publishedAt": "2026-10-19T12:14:33Z"
+      "value": "v5.34.1",
+      "publishedAt": "2026-10-30T13:31:38Z"
     },
     "defaultBranch": "main",
     "destinationType": "demo",
@@ -526,8 +526,8 @@
     "hosting": "wayne-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v32.6.1",
-      "publishedAt": "2026-10-23T17:45:16Z"
+      "value": "v32.6.9",
+      "publishedAt": "2026-10-30T21:29:30Z"
     },
     "defaultBranch": "dev",
     "destinationType": "application",
