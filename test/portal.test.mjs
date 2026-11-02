@@ -51,6 +51,19 @@ test('PC-DMIS report comparer is a separate Wayne-hosted browser application', (
   assert.match(comparer.dataBoundary, /not uploaded/i);
 });
 
+test('CMM View Studio is a Wayne-hosted local 3D inspection application', () => {
+  const studio = tools.find((tool) => tool.slug === 'cmm-view-studio');
+  assert.ok(studio);
+  assert.equal(studio.category, 'Engineering');
+  assert.equal(studio.launchUrl, 'https://wayner84.github.io/cmm-view-studio/');
+  assert.equal(studio.sourceRepo, 'Wayner84/cmm-view-studio');
+  assert.equal(studio.hosting, 'wayne-hosted');
+  assert.equal(studio.destinationType, 'application');
+  assert.match(studio.description, /3D|CMM/i);
+  assert.match(studio.dataBoundary, /locally|browser/i);
+  assert.match(studio.dataBoundary, /not uploaded/i);
+});
+
 test('Minecraft Solid Builder is a Wayne-hosted Gaming application', () => {
   const builder = tools.find((tool) => tool.slug === 'minecraft-solid-builder');
   assert.ok(builder);

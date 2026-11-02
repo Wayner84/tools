@@ -1211,6 +1211,36 @@
     "launchUrl": "https://wayner84.github.io/tools/beam-deflection/"
   },
   {
+    "slug": "cmm-view-studio",
+    "name": "CMM View Studio",
+    "description": "Load and position 3D models, place coordinate-defined CMM points, add scalable labels and leader arrows, then export high-resolution program images.",
+    "category": "Engineering",
+    "launchUrl": "https://wayner84.github.io/cmm-view-studio/",
+    "sourceRepo": "Wayner84/cmm-view-studio",
+    "sourceUrl": "https://github.com/Wayner84/cmm-view-studio",
+    "license": "MIT",
+    "hosting": "wayne-hosted",
+    "tracked": {
+      "kind": "commit",
+      "value": "87e9c634cff2a5a95a495bf665165800f9bdaeb5",
+      "publishedAt": "2026-11-02T02:04:06Z"
+    },
+    "defaultBranch": "main",
+    "destinationType": "application",
+    "operator": "Wayne",
+    "aliases": [
+      "CMM image",
+      "3D model viewer",
+      "measurement points",
+      "coordinate labels",
+      "STL viewer",
+      "metrology",
+      "inspection program image"
+    ],
+    "functionalCheck": "2026-11-02: model viewport, numeric point creation, click-to-place, labels, transform controls and generated launch-route behaviour were tested before publication.",
+    "dataBoundary": "Wayne-hosted static application; selected models and coordinate data are processed locally in the browser and are not uploaded or retained."
+  },
+  {
     "slug": "pc-dmis-report-comparer",
     "name": "PC-DMIS Report Comparer",
     "description": "Compare up to 10 PC-DMIS PDF inspection reports with local browser OCR, specification status and CSV export.",
