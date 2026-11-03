@@ -744,8 +744,8 @@
     "dataBoundary": "Upstream-hosted application outside Tool Deck. Scripts or browser storage may retain designs, and untrusted models can consume browser resources.",
     "tracked": {
       "kind": "commit",
-      "value": "012111f06bb6d8dac2b8d30318512494d87d6932",
-      "publishedAt": "2026-07-16T09:56:32Z"
+      "value": "d56a7ca8de99739aa5ac06566ddbe54c58126360",
+      "publishedAt": "2026-11-03T05:37:50Z"
     },
     "defaultBranch": "main"
   },
