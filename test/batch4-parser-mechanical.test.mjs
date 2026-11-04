@@ -174,10 +174,10 @@ test('beam worksheet rejects finite inputs whose stiffness or results leave the 
 
 const batch4Slugs = ['gcode-preflight', 'step-part21-inspector', 'spur-gear-geometry', 'beam-deflection'];
 
-test('catalogue contains 54 records and 23 Wayne-hosted native records after adding CMM View Studio', async () => {
+test('catalogue contains 55 records and 23 Wayne-hosted native records after adding standalone applications', async () => {
   const catalogue = JSON.parse(await readFile('data/tools.json', 'utf8'));
-  assert.equal(catalogue.length, 54);
-  assert.equal(new Set(catalogue.map((tool) => tool.slug)).size, 54);
+  assert.equal(catalogue.length, 55);
+  assert.equal(new Set(catalogue.map((tool) => tool.slug)).size, 55);
   assert.equal(catalogue.filter((tool) => tool.implementation === 'native').length, 23);
   const records = catalogue.filter((tool) => batch4Slugs.includes(tool.slug));
   assert.equal(records.length, 4);
@@ -205,13 +205,13 @@ test('all four batch 4 UI examples execute through native dispatch and return re
   }
 });
 
-test('build emits exactly 54 routes and all batch 4 worksheets use local assets and native definitions', async () => {
+test('build emits exactly 55 routes and all batch 4 worksheets use local assets and native definitions', async () => {
   execFileSync(process.execPath, ['scripts/build.mjs']);
   const source = await readFile('src/native-tools.js', 'utf8');
   assert.doesNotMatch(source, /innerHTML/);
   assert.match(source, /Clear local input/);
   const catalogue = JSON.parse(await readFile('data/tools.json', 'utf8'));
-  assert.equal(catalogue.length, 54);
+  assert.equal(catalogue.length, 55);
   for (const slug of batch4Slugs) {
     await access(`dist/${slug}/index.html`);
     const html = await readFile(`dist/${slug}/index.html`, 'utf8');
