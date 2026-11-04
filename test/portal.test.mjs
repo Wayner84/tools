@@ -64,19 +64,9 @@ test('CMM View Studio is a Wayne-hosted local 3D inspection application', () => 
   assert.match(studio.dataBoundary, /not uploaded/i);
 });
 
-test('TIA Project Converter is an honest Wayne-hosted local inspector and planner', () => {
+test('TIA Project Converter is parked and absent from the public Tool Deck', () => {
   const converter = tools.find((tool) => tool.slug === 'tia-project-converter');
-  assert.ok(converter);
-  assert.equal(converter.category, 'Engineering');
-  assert.equal(converter.launchUrl, 'https://wayner84.github.io/tia-project-converter/');
-  assert.equal(converter.sourceRepo, 'Wayner84/tia-project-converter');
-  assert.equal(converter.hosting, 'wayne-hosted');
-  assert.equal(converter.destinationType, 'application');
-  assert.match(converter.description, /inspect|plan/i);
-  assert.match(converter.description, /V21.*V18|V18.*V21/i);
-  assert.doesNotMatch(converter.description, /converts? projects/i);
-  assert.match(converter.dataBoundary, /locally|browser/i);
-  assert.match(converter.dataBoundary, /not uploaded/i);
+  assert.equal(converter, undefined);
 });
 
 test('Minecraft Solid Builder is a Wayne-hosted Gaming application', () => {

@@ -1300,35 +1300,5 @@
     ],
     "functionalCheck": "2026-10-25: all five solids, shell thickness, orientations, 3D preview, layer navigation, build-guide exports and responsive layout were tested before deployment.",
     "dataBoundary": "Wayne-hosted static application; generation and rendering run locally in the browser with no uploads, accounts or analytics."
-  },
-  {
-    "slug": "tia-project-converter",
-    "name": "TIA Project Converter",
-    "description": "Inspect TIA Portal .apXX and .zapXX metadata locally and generate honest migration plans, including V21 to V18 planning.",
-    "category": "Engineering",
-    "launchUrl": "https://wayner84.github.io/tia-project-converter/",
-    "sourceRepo": "Wayner84/tia-project-converter",
-    "sourceUrl": "https://github.com/Wayner84/tia-project-converter",
-    "license": "MIT",
-    "hosting": "wayne-hosted",
-    "tracked": {
-      "kind": "commit",
-      "value": "a3d930cb245f9c0309182eac35c4a24f50561a56",
-      "publishedAt": "2026-11-04T22:11:20Z"
-    },
-    "defaultBranch": "main",
-    "destinationType": "application",
-    "operator": "Wayne",
-    "aliases": [
-      "TIA Portal",
-      "Siemens PLC",
-      "project downgrade",
-      "V21 to V18",
-      "zap21",
-      "ap21",
-      "migration planner"
-    ],
-    "functionalCheck": "2026-11-04: strict XML and bounded ZIP inspection, V19/V21 private fixtures, V21-to-V18 plan generation, browser file flow and live Pages deployment were verified.",
-    "dataBoundary": "Wayne-hosted static application; selected TIA project files are inspected locally in the browser and are not uploaded or retained. The tool plans migrations but does not rewrite proprietary TIA projects."
   }
 ]
