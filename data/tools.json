@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "f331e2cc86ef8cc77eac30d2762018a9bb21b1b9",
-      "publishedAt": "2026-11-02T06:53:22Z"
+      "value": "4e94efb6d7a20fb22fd743ac335065d24b80eb6a",
+      "publishedAt": "2026-11-04T03:37:41Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -744,8 +744,8 @@
     "dataBoundary": "Upstream-hosted application outside Tool Deck. Scripts or browser storage may retain designs, and untrusted models can consume browser resources.",
     "tracked": {
       "kind": "commit",
-      "value": "d56a7ca8de99739aa5ac06566ddbe54c58126360",
-      "publishedAt": "2026-11-03T05:37:50Z"
+      "value": "d4552def6a9b047b016b321f31cdcdcb7e6cfd5b",
+      "publishedAt": "2026-11-04T03:24:15Z"
     },
     "defaultBranch": "main"
   },
