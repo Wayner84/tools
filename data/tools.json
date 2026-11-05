@@ -177,8 +177,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "2026.10.0",
-      "publishedAt": "2026-10-30T09:20:14Z"
+      "value": "2026.10.1",
+      "publishedAt": "2026-11-05T08:15:08Z"
     },
     "defaultBranch": "main",
     "destinationType": "external service",
@@ -526,8 +526,8 @@
     "hosting": "wayne-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v32.6.9",
-      "publishedAt": "2026-10-30T21:29:30Z"
+      "value": "v32.6.10",
+      "publishedAt": "2026-11-04T18:21:51Z"
     },
     "defaultBranch": "dev",
     "destinationType": "application",
@@ -574,8 +574,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "dfffa8fdef1b8b5896b85717c7d86df11644187d",
-      "publishedAt": "2026-10-29T05:43:50Z"
+      "value": "5c3262aa56eb2f92c4dd32f077a67651d3c7eb16",
+      "publishedAt": "2026-11-05T03:18:03Z"
     },
     "defaultBranch": "main",
     "destinationType": "reference",
