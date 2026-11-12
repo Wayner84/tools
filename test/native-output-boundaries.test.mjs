@@ -214,10 +214,17 @@ const calculatorCases = {
   reviewCalibrationInterval: () => nativeTools.reviewCalibrationInterval({ lastCalibrationDate: '2024-01-31', approvedIntervalDays: 30, reviewDate: '2024-02-29', history: [{ date: '2024-02-07', outcome: 'pass', drift: 0.01 }] }),
   selectGaugeBlockStack: () => nativeTools.selectGaugeBlockStack({ target: '3.05', inventory: ['1.0', '1.05', '2.0'], maxBlocks: 3 }),
   transformPointListCsv: () => nativeTools.transformPointListCsv({ csv: 'id,x,y,z\nP1,1,2,3', rotationX: 0, rotationY: 0, rotationZ: 90, translationX: 1, translationY: 2, translationZ: 3, inverse: false, unit: 'mm' }),
+  fitShadowgraphLine: () => nativeTools.fitShadowgraphLine([{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 2, y: 2 }]),
+  fitShadowgraphCircle: () => nativeTools.fitShadowgraphCircle([{ x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }]),
+  intersectShadowgraphLines: () => nativeTools.intersectShadowgraphLines({ points: [{ x: 0, y: 0 }, { x: 1, y: 1 }] }, { points: [{ x: 0, y: 1 }, { x: 1, y: 0 }] }),
+  intersectShadowgraphLineCircle: () => nativeTools.intersectShadowgraphLineCircle({ points: [{ x: -2, y: 0 }, { x: 2, y: 0 }] }, { centre: { x: 0, y: 0 }, radius: 1 }),
+  measureShadowgraphDistance: () => nativeTools.measureShadowgraphDistance({ x: 0, y: 0 }, { x: 3, y: 4 }, '2d'),
+  measureShadowgraphAngle: () => nativeTools.measureShadowgraphAngle({ points: [{ x: 0, y: 0 }, { x: 1, y: 0 }] }, { points: [{ x: 0, y: 0 }, { x: 0, y: 1 }] }),
+  measureShadowgraphCircleSize: () => nativeTools.measureShadowgraphCircleSize({ radius: 1 }, 'diameter'),
 };
 
 test('inventory executes every exported ordinary calculator with finite result trees and safe payloads', () => {
-  const exportedCalculators = Object.keys(nativeTools).filter((name) => /^(?:calculate|evaluate|fit|generate|inspect|parseGcode|parseSpcObservations|review|select|transform)/.test(name)).sort();
+  const exportedCalculators = Object.keys(nativeTools).filter((name) => /^(?:calculate|evaluate|fit|generate|inspect|intersectShadowgraph|measureShadowgraph|parseGcode|parseSpcObservations|review|select|transform)/.test(name)).sort();
   assert.deepEqual(exportedCalculators, Object.keys(calculatorCases).sort(), 'calculator inventory must be updated when an export is added');
   for (const [name, execute] of Object.entries(calculatorCases)) assertSafePayload(execute(), name);
 });

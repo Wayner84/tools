@@ -31,7 +31,7 @@ for (const tool of tools) {
 
   const directory = path.join(dist, tool.slug);
   await mkdir(directory, { recursive: true });
-  const brandMark = tool.slug === 'coordinate-geometry'
+  const brandMark = ['coordinate-geometry','shadowgraph-geometry-workbench'].includes(tool.slug)
     ? '<img class="tool-logo" src="../assets/tpl-logo-pink.png" alt="Townsend Precision Labs Ltd">'
     : '';
   const html = tool.implementation === 'native'

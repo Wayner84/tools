@@ -1270,6 +1270,22 @@
     "dataBoundary": "Wayne-hosted static application; selected PDF reports are processed locally in the browser and are not uploaded or retained."
   },
   {
+    "slug": "shadowgraph-geometry-workbench",
+    "name": "Shadowgraph Geometry Workbench",
+    "description": "Build named measured points, fit lines and circles, construct intersections, and annotate live equal-scale shadowgraph geometry.",
+    "category": "Engineering",
+    "sourceUrl": "https://github.com/Wayner84/tools",
+    "license": "MIT",
+    "hosting": "wayne-hosted",
+    "destinationType": "worksheet",
+    "operator": "Wayne / Tool Deck",
+    "aliases": ["shadowgraph", "orthogonal least squares", "intersection", "metrology", "CMM", "geometry workbench"],
+    "functionalCheck": "2026-11-12: pure geometry, model register, generated route and local UI contracts are tested; visual browser acceptance remains local-only.",
+    "dataBoundary": "Runs locally in this browser tab with no network requests, uploads, accounts or telemetry.",
+    "implementation": "native",
+    "launchUrl": "https://wayner84.github.io/tools/shadowgraph-geometry-workbench/"
+  },
+  {
     "slug": "minecraft-solid-builder",
     "name": "Minecraft Solid Builder",
     "description": "Generate all five Platonic solids as Minecraft block builds with a 3D preview and layer-by-layer blueprints.",
