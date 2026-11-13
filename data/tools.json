@@ -97,8 +97,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "commit",
-      "value": "74e28e101c2aeea130821299923a4b77b2e26f12",
-      "publishedAt": "2026-11-12T10:52:31Z"
+      "value": "7412771821d690897bd1ff2c8fd5f9e7cc175df8",
+      "publishedAt": "2026-11-13T10:13:10Z"
     },
     "defaultBranch": "develop",
     "destinationType": "application",
@@ -151,8 +151,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v5.34.1",
-      "publishedAt": "2026-10-30T13:31:38Z"
+      "value": "v5.35.0",
+      "publishedAt": "2026-11-13T11:27:22Z"
     },
     "defaultBranch": "main",
     "destinationType": "demo",
@@ -1279,7 +1279,14 @@
     "hosting": "wayne-hosted",
     "destinationType": "worksheet",
     "operator": "Wayne / Tool Deck",
-    "aliases": ["shadowgraph", "orthogonal least squares", "intersection", "metrology", "CMM", "geometry workbench"],
+    "aliases": [
+      "shadowgraph",
+      "orthogonal least squares",
+      "intersection",
+      "metrology",
+      "CMM",
+      "geometry workbench"
+    ],
     "functionalCheck": "2026-11-12: pure geometry, model register, generated route and local UI contracts are tested; visual browser acceptance remains local-only.",
     "dataBoundary": "Runs locally in this browser tab with no network requests, uploads, accounts or telemetry.",
     "implementation": "native",
