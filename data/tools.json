@@ -151,8 +151,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v5.35.0",
-      "publishedAt": "2026-11-13T11:27:22Z"
+      "value": "v5.35.1",
+      "publishedAt": "2026-11-19T09:10:21Z"
     },
     "defaultBranch": "main",
     "destinationType": "demo",
