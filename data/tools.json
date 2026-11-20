@@ -204,8 +204,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v2.8.11",
-      "publishedAt": "2026-10-31T11:31:39Z"
+      "value": "v2.8.12",
+      "publishedAt": "2026-11-19T17:42:56Z"
     },
     "defaultBranch": "main",
     "destinationType": "application",
@@ -401,8 +401,8 @@
     "hosting": "external-service",
     "tracked": {
       "kind": "release",
-      "value": "v5.6.1",
-      "publishedAt": "2026-11-16T18:57:39Z"
+      "value": "v5.6.2",
+      "publishedAt": "2026-11-20T13:17:01Z"
     },
     "defaultBranch": "main",
     "destinationType": "external service",
