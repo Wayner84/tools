@@ -11,8 +11,8 @@
     "hosting": "official-hosted",
     "tracked": {
       "kind": "release",
-      "value": "v11.5.0",
-      "publishedAt": "2026-09-18T11:54:19Z"
+      "value": "v11.6.0",
+      "publishedAt": "2026-11-20T17:36:54Z"
     },
     "defaultBranch": "master",
     "destinationType": "application",
